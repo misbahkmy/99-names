@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#080810">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="99 Names">
+<meta name="description" content="How many names of Allah do you know?">
+<title>99 Names · Asma-ul-Husna Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --bg2: #0d0d1a;
+  --bg3: #111120;
+  --border: #1a1a2e;
+  --border2: #252540;
+  --text: #e8e8f2;
+  --text2: #9090b0;
+  --text3: #505070;
+  --accent: #6366f1;
+  --accent2: #a78bfa;
+  --green: #34d399;
+  --yellow: #fbbf24;
+  --red: #f87171;
+  --gold: #f59e0b;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; }
+
+/* ── Screens ── */
+.screen { position: fixed; inset: 0; display: flex; flex-direction: column; overflow: hidden; transition: opacity .4s, transform .4s; }
+.screen.hidden { opacity: 0; pointer-events: none; transform: translateY(20px); }
+
+/* ── Splash ── */
+#splash { background: var(--bg); align-items: center; justify-content: center; gap: 0; cursor: pointer; }
+#splash::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(167,139,250,.08) 0%, transparent 60%);
+}
+.splash-orb {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; margin-bottom: 32px;
+  box-shadow: 0 0 60px rgba(99,102,241,.4);
+  animation: pulse-orb 3s ease-in-out infinite;
+}
+@keyframes pulse-orb { 0%,100%{box-shadow:0 0 60px rgba(99,102,241,.4)} 50%{box-shadow:0 0 100px rgba(99,102,241,.7)} }
+.splash-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,6vw,42px); font-weight: 300; font-style: italic; color: var(--text); letter-spacing: 1px; text-align: center; }
+.splash-subtitle { font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: var(--accent2); margin-top: 6px; text-align: center; }
+.splash-tagline { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text3); margin-top: 20px; font-style: italic; text-align: center; }
+.splash-tap { font-size: 11px; letter-spacing: 3px; color: var(--text3); margin-top: 60px; text-transform: uppercase; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:.3} 50%{opacity:.8} }
+
+/* ── Nav ── */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; padding-top: max(16px, env(safe-area-inset-top));
+  background: rgba(8,8,16,.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); flex-shrink: 0; position: relative; z-index: 10;
+}
+.nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: var(--text); }
+.nav-btn { background: none; border: none; color: var(--accent2); font-family: inherit; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px; }
+.nav-btn svg { width: 18px; height: 18px; }
+.hamburger { flex-direction: column; gap: 4px; padding: 8px; }
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--accent2); border-radius: 2px; transition: .3s; }
+
+/* ── Dashboard ── */
+#dashboard { background: var(--bg); }
+#dashboard::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 20% 10%, rgba(99,102,241,.07) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 90%, rgba(167,139,250,.05) 0%, transparent 50%);
+}
+.dashboard-scroll { flex: 1; overflow-y: auto; padding: 20px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 14px; }
+
+/* Cards */
+.card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
+  position: relative; overflow: hidden;
+}
+.card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.02) 0%, transparent 60%); pointer-events: none; }
+
+/* Player card */
+.player-card { display: flex; align-items: center; gap: 14px; }
+.avatar {
+  width: 54px; height: 54px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 600; color: white;
+}
+.player-info { flex: 1; }
+.player-name { font-size: 17px; font-weight: 500; color: var(--text); }
+.player-games { font-size: 11px; color: var(--text3); margin-top: 3px; letter-spacing: 1px; }
+.edit-btn { background: none; border: none; cursor: pointer; color: var(--accent); font-size: 20px; padding: 4px; }
+
+/* Easy names card */
+.easy-card { background: linear-gradient(135deg, rgba(52,211,153,.08), rgba(52,211,153,.03)); border-color: rgba(52,211,153,.2); }
+.easy-card-inner { display: flex; align-items: center; gap: 16px; }
+.easy-icon { font-size: 32px; }
+.easy-text { flex: 1; }
+.easy-label { font-size: 12px; color: var(--green); letter-spacing: 1px; text-transform: uppercase; }
+.easy-desc { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.easy-count { font-family: 'DM Mono', monospace; font-size: 36px; font-weight: 500; color: var(--green); white-space: nowrap; }
+.easy-denom { font-size: 12px; color: var(--text3); }
+
+/* Score row */
+.score-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.score-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+.score-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+.score-label span { font-size: 14px; }
+.score-val { font-family: 'DM Mono', monospace; font-size: 34px; font-weight: 500; color: var(--text); margin-top: 8px; }
+.score-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+/* Buttons */
+.btn-primary {
+  width: 100%; padding: 16px; border: none; border-radius: 14px; cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white; font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500;
+  letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 8px 32px rgba(99,102,241,.3); transition: transform .15s, box-shadow .15s;
+}
+.btn-primary:active { transform: scale(.98); box-shadow: 0 4px 16px rgba(99,102,241,.2); }
+.btn-secondary {
+  width: 100%; padding: 14px; border: 1px solid var(--border2); border-radius: 14px; cursor: pointer;
+  background: var(--bg2); color: var(--accent2); font-family: 'DM Mono', monospace;
+  font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: border-color .2s;
+}
+.btn-secondary:active { border-color: var(--accent); }
+.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ── Overlays ── */
+.overlay {
+  position: fixed; inset: 0; background: rgba(4,4,12,.85); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center; z-index: 100;
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.overlay.show { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px;
+  padding: 28px; width: min(380px, calc(100vw - 40px)); max-height: 85vh; overflow-y: auto;
+  transform: scale(.95); transition: transform .3s;
+}
+.overlay.show .modal { transform: scale(1); }
+.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--text); margin-bottom: 6px; text-align: center; }
+.modal-sub { font-size: 12px; color: var(--text3); text-align: center; margin-bottom: 24px; }
+.modal input {
+  width: 100%; padding: 14px; background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 10px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 15px;
+  outline: none; margin-bottom: 16px;
+}
+.modal input:focus { border-color: var(--accent); }
+
+/* Time picker */
+.time-picker { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.time-btn { background: none; border: none; color: var(--accent); font-size: 32px; cursor: pointer; padding: 8px 16px; transition: transform .1s; }
+.time-btn:active { transform: scale(.9); }
+.time-display { text-align: center; }
+.time-num { font-family: 'DM Mono', monospace; font-size: 52px; font-weight: 500; color: var(--text); line-height: 1; }
+.time-unit { font-size: 12px; color: var(--text3); letter-spacing: 2px; margin-top: 4px; }
+
+/* ── Menu ── */
+.menu-drawer {
+  position: fixed; left: 0; top: 0; bottom: 0; width: 280px; background: var(--bg2);
+  border-right: 1px solid var(--border); z-index: 200; transform: translateX(-100%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column;
+  padding-top: max(0px, env(safe-area-inset-top));
+}
+.menu-drawer.open { transform: translateX(0); }
+.menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 199; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.menu-backdrop.show { opacity: 1; pointer-events: all; }
+.menu-header { padding: 24px 20px 16px; border-bottom: 1px solid var(--border); }
+.menu-player { display: flex; align-items: center; gap: 12px; }
+.menu-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; color: white; flex-shrink: 0; }
+.menu-name { font-size: 15px; color: var(--text); font-weight: 500; }
+.menu-best { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.menu-items { flex: 1; overflow-y: auto; padding: 12px 0; }
+.menu-item { display: flex; align-items: center; gap: 14px; padding: 14px 20px; cursor: pointer; transition: background .2s; font-size: 14px; color: var(--text); border: none; background: none; width: 100%; text-align: left; font-family: inherit; }
+.menu-item:hover { background: rgba(99,102,241,.08); }
+.menu-item-icon { font-size: 18px; width: 24px; text-align: center; }
+.menu-divider { height: 1px; background: var(--border); margin: 8px 20px; }
+
+/* ── Quiz Screen ── */
+#quiz { background: var(--bg); }
+.quiz-stats { padding: 14px 16px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; border-bottom: 1px solid var(--border); }
+.progress-wrap { flex: 1; }
+.progress-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); letter-spacing: 1px; margin-bottom: 6px; }
+.progress-bar { height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 3px; transition: width .4s ease; }
+.timer-wrap { text-align: right; flex-shrink: 0; }
+.timer-label { font-size: 9px; letter-spacing: 2px; color: var(--text3); text-transform: uppercase; }
+.timer-val { font-family: 'DM Mono', monospace; font-size: 26px; font-weight: 500; transition: color .5s; line-height: 1.1; }
+.timer-val.green { color: var(--green); }
+.timer-val.yellow { color: var(--yellow); }
+.timer-val.red { color: var(--red); }
+.timer-val.free { color: var(--accent2); }
+
+/* Mic section */
+.mic-section { padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
+.mic-status { font-size: 12px; color: var(--text3); letter-spacing: 1px; transition: color .2s; }
+.mic-status.listening { color: var(--green); }
+.mic-live { font-size: 14px; color: var(--text); min-height: 20px; text-align: center; }
+.mic-btn {
+  width: 72px; height: 72px; border-radius: 50%; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center; font-size: 26px;
+  box-shadow: 0 4px 20px rgba(99,102,241,.35); transition: transform .15s, box-shadow .15s;
+  position: relative; user-select: none; -webkit-user-select: none;
+}
+.mic-btn.listening {
+  background: linear-gradient(135deg, #059669, #10b981);
+  box-shadow: 0 4px 24px rgba(16,185,129,.5);
+  animation: mic-pulse 1s ease-in-out infinite;
+}
+@keyframes mic-pulse { 0%,100%{box-shadow:0 4px 24px rgba(16,185,129,.5)} 50%{box-shadow:0 4px 40px rgba(16,185,129,.8), 0 0 0 12px rgba(16,185,129,.1)} }
+.mic-hint { font-size: 10px; color: var(--text3); letter-spacing: 1px; }
+
+/* Input row */
+.input-row { padding: 0 16px 12px; display: flex; gap: 8px; flex-shrink: 0; }
+.divider-row { display: flex; align-items: center; gap: 10px; padding: 0 16px 10px; flex-shrink: 0; }
+.divider-row::before, .divider-row::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.divider-row span { font-size: 10px; color: var(--text3); letter-spacing: 1px; white-space: nowrap; }
+.quiz-input {
+  flex: 1; padding: 13px 14px; background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 12px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 15px;
+  outline: none; transition: border-color .2s;
+}
+.quiz-input:focus { border-color: var(--accent); }
+.quiz-input.shake { animation: shake .5s ease; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+.go-btn {
+  padding: 13px 18px; background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none; border-radius: 12px; color: white; font-family: 'DM Mono', monospace;
+  font-size: 13px; font-weight: 500; cursor: pointer; letter-spacing: 1px; transition: transform .15s;
+}
+.go-btn:active { transform: scale(.95); }
+
+/* Word grid */
+.word-grid { flex: 1; overflow-y: auto; padding: 12px 14px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; align-content: start; }
+.word-tile {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 6px; text-align: center; font-size: 12px; font-family: 'Tajawal', sans-serif;
+  color: transparent; text-shadow: 0 0 8px rgba(160,160,200,.4); filter: blur(4px);
+  transition: all .35s ease; user-select: none; cursor: default; min-height: 44px;
+  display: flex; align-items: center; justify-content: center;
+}
+.word-tile.guessed {
+  color: var(--accent2); text-shadow: none; filter: none;
+  background: rgba(99,102,241,.08); border-color: rgba(99,102,241,.35);
+  font-weight: 500;
+}
+.word-tile.flash { animation: tile-pop .5s ease; }
+@keyframes tile-pop { 0%{transform:scale(.85)} 60%{transform:scale(1.1)} 100%{transform:scale(1)} }
+
+/* ── End overlay ── */
+.end-icon { font-size: 56px; text-align: center; margin-bottom: 12px; }
+.end-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; color: var(--text); text-align: center; margin-bottom: 8px; }
+.end-score { text-align: center; margin-bottom: 28px; }
+.end-score-num { font-family: 'DM Mono', monospace; font-size: 28px; color: var(--accent2); }
+.end-score-text { font-size: 13px; color: var(--text3); }
+.end-btns { display: flex; flex-direction: column; gap: 10px; }
+.btn-outline {
+  width: 100%; padding: 14px; border: 1px solid var(--border2); border-radius: 12px;
+  background: var(--bg3); color: var(--accent2); font-family: 'DM Mono', monospace;
+  font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-ghost {
+  width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px;
+  background: none; color: var(--text3); font-family: 'DM Mono', monospace;
+  font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.free-badge {
+  display: inline-block; padding: 2px 8px; background: rgba(167,139,250,.15);
+  border: 1px solid rgba(167,139,250,.3); border-radius: 20px; font-size: 10px;
+  color: var(--accent2); letter-spacing: 1px; margin-left: 8px; vertical-align: middle;
+}
+
+/* ── Learn Screen ── */
+#learn { background: var(--bg); }
+.learn-search-wrap { padding: 12px 16px; flex-shrink: 0; border-bottom: 1px solid var(--border); }
+.learn-search {
+  display: flex; align-items: center; gap: 10px; background: var(--bg3);
+  border: 1px solid var(--border2); border-radius: 12px; padding: 10px 14px;
+}
+.learn-search input { flex: 1; background: none; border: none; color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; outline: none; }
+.learn-search input::placeholder { color: var(--text3); }
+.learn-search-icon { color: var(--text3); font-size: 16px; }
+.learn-list { flex: 1; overflow-y: auto; padding: 10px 14px 40px; display: flex; flex-direction: column; gap: 8px; }
+.learn-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color .2s; }
+.learn-item.expanded { border-color: rgba(99,102,241,.4); }
+.learn-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; }
+.learn-num {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--bg3);
+  display: flex; align-items: center; justify-content: center; font-size: 12px;
+  color: var(--text3); flex-shrink: 0; transition: background .2s, color .2s;
+}
+.learn-item.expanded .learn-num { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; }
+.learn-info { flex: 1; }
+.learn-translit { font-size: 14px; font-weight: 500; color: var(--text); }
+.learn-meaning { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.learn-arabic { font-family: 'Tajawal', sans-serif; font-size: 20px; color: var(--text3); transition: color .2s; margin-right: 4px; }
+.learn-item.expanded .learn-arabic { color: var(--accent2); }
+.learn-chevron { font-size: 11px; color: var(--text3); transition: transform .3s; }
+.learn-item.expanded .learn-chevron { transform: rotate(180deg); }
+.learn-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
+.learn-item.expanded .learn-body { display: block; }
+.learn-arabic-large { font-family: 'Tajawal', sans-serif; font-size: 38px; color: var(--accent2); text-align: center; padding: 16px 0 10px; }
+.learn-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* ── Pause overlay ── */
+.pause-overlay {
+  position: fixed; inset: 0; background: rgba(4,4,12,.95); z-index: 50;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.pause-overlay.show { opacity: 1; pointer-events: all; }
+.pause-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-style: italic; color: var(--text); }
+.pause-score { font-size: 13px; color: var(--text3); }
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div class="screen" id="splash">
+  <div class="splash-orb">☪</div>
+  <div class="splash-title">Asma-ul-Husna</div>
+  <div class="splash-subtitle">Quiz</div>
+  <div class="splash-tagline">How many names of Allah do you know?</div>
+  <div class="splash-tap">Tap anywhere to begin</div>
+</div>
+
+<!-- MENU DRAWER -->
+<div class="menu-backdrop" id="menuBackdrop" onclick="closeMenu()"></div>
+<div class="menu-drawer" id="menuDrawer">
+  <div class="menu-header">
+    <div class="menu-player">
+      <div class="menu-avatar" id="menuAvatar">?</div>
+      <div>
+        <div class="menu-name" id="menuName">Player</div>
+        <div class="menu-best" id="menuBest">Best: 0 / 99</div>
+      </div>
+    </div>
+  </div>
+  <div class="menu-items">
+    <button class="menu-item" onclick="showScreen('dashboard');closeMenu()"><span class="menu-item-icon">🏠</span> Home</button>
+    <button class="menu-item" onclick="showScreen('learn');closeMenu()"><span class="menu-item-icon">📖</span> Learn</button>
+    <div class="menu-divider"></div>
+    <button class="menu-item" onclick="closeMenu();showTimePopup()"><span class="menu-item-icon">▶️</span> Start Quiz</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="screen hidden" id="dashboard">
+  <div class="nav">
+    <button class="nav-btn hamburger" onclick="openMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-title">99 Names</div>
+    <div style="width:44px"></div>
+  </div>
+  <div class="dashboard-scroll">
+    <!-- Player -->
+    <div class="card">
+      <div class="player-card">
+        <div class="avatar" id="dashAvatar">?</div>
+        <div class="player-info">
+          <div class="player-name" id="dashName">Set your name</div>
+          <div class="player-games" id="dashGames">0 GAMES PLAYED</div>
+        </div>
+        <button class="edit-btn" onclick="showNameEditor()">✏️</button>
+      </div>
+    </div>
+    <!-- Easy names -->
+    <div class="card easy-card">
+      <div class="easy-card-inner">
+        <div class="easy-icon">🧠</div>
+        <div class="easy-text">
+          <div class="easy-label">Names You Know Well</div>
+          <div class="easy-desc">Consistently guessed correctly</div>
+        </div>
+        <div>
+          <span class="easy-count" id="easyCount">0</span>
+          <span class="easy-denom"> / 99</span>
+        </div>
+      </div>
+    </div>
+    <!-- Scores -->
+    <div class="score-row">
+      <div class="score-card">
+        <div class="score-label"><span>🏆</span> BEST SCORE</div>
+        <div class="score-val" id="bestScore">0</div>
+        <div class="score-sub">out of 99</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label"><span>🕐</span> LAST SCORE</div>
+        <div class="score-val" id="lastScore">0</div>
+        <div class="score-sub">out of 99</div>
+      </div>
+    </div>
+    <!-- Buttons -->
+    <button class="btn-primary" onclick="showTimePopup()">▶ &nbsp;Start Quiz</button>
+    <button class="btn-secondary" onclick="showScreen('learn')">📖 &nbsp;Learn the Names</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen hidden" id="quiz">
+  <div class="nav">
+    <button class="nav-btn" onclick="saveScore();showScreen('dashboard')" style="gap:4px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      Home
+    </button>
+    <div class="nav-title">Asma-ul-Husna</div>
+    <button class="nav-btn" id="pauseBtn" onclick="togglePause()">⏸</button>
+  </div>
+  <!-- Stats -->
+  <div class="quiz-stats">
+    <div class="progress-wrap">
+      <div class="progress-labels">
+        <span>PROGRESS</span>
+        <span id="progressText">0 / 99</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-label">TIME</div>
+      <div class="timer-val green" id="timerVal">05:00</div>
+    </div>
+  </div>
+  <!-- Mic -->
+  <div class="mic-section">
+    <div class="mic-status" id="micStatus">Hold mic to speak</div>
+    <div class="mic-live" id="micLive"></div>
+    <button class="mic-btn" id="micBtn">🎙</button>
+    <div class="mic-hint">HOLD TO SPEAK · RELEASE TO SUBMIT</div>
+  </div>
+  <!-- Divider -->
+  <div class="divider-row"><span>or type</span></div>
+  <!-- Input -->
+  <div class="input-row">
+    <input class="quiz-input" id="quizInput" placeholder="Type a name…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <button class="go-btn" onclick="submitGuess()">GO</button>
+  </div>
+  <!-- Grid -->
+  <div class="word-grid" id="wordGrid"></div>
+</div>
+
+<!-- LEARN -->
+<div class="screen hidden" id="learn">
+  <div class="nav">
+    <button class="nav-btn" onclick="showScreen('dashboard')" style="gap:4px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      Back
+    </button>
+    <div class="nav-title">Learn</div>
+    <div style="width:44px"></div>
+  </div>
+  <div class="learn-search-wrap">
+    <div class="learn-search">
+      <span class="learn-search-icon">🔍</span>
+      <input id="learnSearch" placeholder="Search names or meanings…" oninput="filterLearn()" autocomplete="off">
+    </div>
+  </div>
+  <div class="learn-list" id="learnList"></div>
+</div>
+
+<!-- PAUSE OVERLAY -->
+<div class="pause-overlay" id="pauseOverlay">
+  <div style="font-size:48px">⏸</div>
+  <div class="pause-title">Paused</div>
+  <div class="pause-score" id="pauseScore">0 names found</div>
+  <button class="btn-primary" style="width:200px" onclick="togglePause()">▶ &nbsp;Resume</button>
+  <button class="btn-ghost" style="width:200px" onclick="saveScore();showScreen('dashboard')">🏠 &nbsp;Go Home</button>
+</div>
+
+<!-- NAME EDITOR -->
+<div class="overlay" id="nameOverlay">
+  <div class="modal">
+    <div class="modal-title">Your Name</div>
+    <div class="modal-sub">How should we call you?</div>
+    <input id="nameInput" placeholder="Enter your name" maxlength="30">
+    <button class="btn-primary" onclick="saveName()">Save</button>
+  </div>
+</div>
+
+<!-- TIME POPUP -->
+<div class="overlay" id="timeOverlay">
+  <div class="modal">
+    <div class="modal-title">Set Time Limit</div>
+    <div class="modal-sub">How many minutes do you want?</div>
+    <div class="time-picker">
+      <button class="time-btn" onclick="changeTime(-1)">−</button>
+      <div class="time-display">
+        <div class="time-num" id="timeNum">5</div>
+        <div class="time-unit">MINUTES</div>
+      </div>
+      <button class="time-btn" onclick="changeTime(1)">+</button>
+    </div>
+    <button class="btn-primary" onclick="startQuiz()">Let's Go ›</button>
+  </div>
+</div>
+
+<!-- END OVERLAY -->
+<div class="overlay" id="endOverlay">
+  <div class="modal">
+    <div class="end-icon" id="endIcon">⏱️</div>
+    <div class="end-title" id="endTitle">Time's Up!</div>
+    <div class="end-score">
+      <span class="end-score-num" id="endNum">0</span>
+      <span class="end-score-text"> / 99 names found</span>
+    </div>
+    <div class="end-btns">
+      <button class="btn-primary" onclick="playAgain()">↺ &nbsp;Play Again</button>
+      <button class="btn-outline" onclick="enterFreePlay()">∞ &nbsp;Keep Playing <span class="free-badge">no score</span></button>
+      <button class="btn-ghost" onclick="saveScore();showScreen('dashboard')">🏠 &nbsp;Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const NAMES_DATA = [
+  {display:"Ar-Rahman",arabic:"الرَّحْمَنُ",meaning:"The Most Gracious",desc:"The One who has plenty of mercy for the believers and the blasphemers in this world and exclusively for the believers in the Hereafter.",variants:["ar-rahman","rahman","rehman","rahmaan","rehmaan","ar rahman","ar rehman"]},
+  {display:"Ar-Raheem",arabic:"الرَّحِيمُ",meaning:"The Most Merciful",desc:"The One who has plenty of mercy for the believers and shows special mercy to them on the Day of Judgement.",variants:["ar-raheem","raheem","rahim","reheem","rehim","rahem","ar rahim","ar raheem"]},
+  {display:"Al-Malik",arabic:"الْمَلِكُ",meaning:"The King",desc:"The One with complete dominion over all of creation. His kingdom is eternal and without any partner.",variants:["al-malik","malik","maalik"]},
+  {display:"Al-Quddus",arabic:"الْقُدُّوسُ",meaning:"The Most Holy",desc:"The One who is pure from any imperfection and clear of all deficiencies or likeness to creation.",variants:["al-quddus","quddus","quddoos","qudoos","kuddus"]},
+  {display:"As-Salaam",arabic:"السَّلَامُ",meaning:"The Source of Peace",desc:"The One who is free from every imperfection. He grants peace and safety to His creation.",variants:["as-salaam","salaam","salam","as salam"]},
+  {display:"Al-Mu'min",arabic:"الْمُؤْمِنُ",meaning:"The Guardian of Faith",desc:"The One who witnessed for Himself that no one is God but Him. He gives security to His believers.",variants:["al-mu'min","mumin","momin","mu'min","moomin"]},
+  {display:"Al-Muhaymin",arabic:"الْمُهَيْمِنُ",meaning:"The Protector",desc:"The One who witnesses the saying and deeds of His creatures and watches over and protects them.",variants:["al-muhaymin","muhaymin","muhaimin","muhaymeen"]},
+  {display:"Al-Azeez",arabic:"الْعَزِيزُ",meaning:"The Almighty",desc:"The One who is invincible and dominant over all things. Nothing can overpower or humble Him.",variants:["al-azeez","azeez","aziz"]},
+  {display:"Al-Jabbar",arabic:"الْجَبَّارُ",meaning:"The Compeller",desc:"The One who repairs and restores all that is broken. He compels and overpowers all of creation.",variants:["al-jabbar","jabbar","jabar"]},
+  {display:"Al-Mutakabbir",arabic:"الْمُتَكَبِّرُ",meaning:"The Supreme",desc:"The One who is clear of the attributes of the creatures and of resembling them.",variants:["al-mutakabbir","mutakabbir","mutakabir"]},
+  {display:"Al-Khaaliq",arabic:"الْخَالِقُ",meaning:"The Creator",desc:"The One who brings everything from non-existence into existence according to His divine plan.",variants:["al-khaaliq","khaliq","khaaliq","khalik"]},
+  {display:"Al-Baari",arabic:"الْبَارِئُ",meaning:"The Originator",desc:"The One who created all things distinct from one another, giving each its unique form and nature.",variants:["al-baari","baari","bari","baaree"]},
+  {display:"Al-Musawwir",arabic:"الْمُصَوِّرُ",meaning:"The Fashioner",desc:"The One who forms His creatures in whatever manner He wills, giving them their unique shapes.",variants:["al-musawwir","musawwir","musavir","musawer"]},
+  {display:"Al-Ghaffar",arabic:"الْغَفَّارُ",meaning:"The Ever-Forgiving",desc:"The One who forgives the sins of His slaves repeatedly. His forgiveness is vast and unlimited.",variants:["al-ghaffar","ghaffar","gafar","gaffar","ghafar"]},
+  {display:"Al-Qahhar",arabic:"الْقَهَّارُ",meaning:"The Subduer",desc:"The One who has dominance over His creation. Everything is subdued and humbled before His power.",variants:["al-qahhar","qahhar","kahhar","qahar"]},
+  {display:"Al-Wahhab",arabic:"الْوَهَّابُ",meaning:"The Bestower",desc:"The One who is generous in giving without any return. He bestows gifts freely upon His creation.",variants:["al-wahhab","wahhab","wahab","wahhaab"]},
+  {display:"Ar-Razzaq",arabic:"الرَّزَّاقُ",meaning:"The Provider",desc:"The One who provides sustenance for all of creation. He is the source of all provision and nourishment.",variants:["ar-razzaq","razzaq","razzak","razak","razzaaq"]},
+  {display:"Al-Fattah",arabic:"الْفَتَّاحُ",meaning:"The Opener",desc:"The One who opens all doors of mercy and provision for His slaves. He is the judge between people.",variants:["al-fattah","fattah","fatah","fattaah"]},
+  {display:"Al-'Aleem",arabic:"الْعَلِيمُ",meaning:"The All-Knowing",desc:"The One for whom nothing is hidden. His knowledge encompasses all things past, present and future.",variants:["al-'aleem","aleem","alim","aalim"]},
+  {display:"Al-Qaabid",arabic:"الْقَابِضُ",meaning:"The Withholder",desc:"The One who constricts and withholds provision according to His wisdom and what is best for His slaves.",variants:["al-qaabid","qaabid","qabid","kabid"]},
+  {display:"Al-Baasit",arabic:"الْبَاسِطُ",meaning:"The Extender",desc:"The One who expands and extends provision to whom He wills according to His perfect wisdom.",variants:["al-baasit","baasit","basit","basith"]},
+  {display:"Al-Khaafid",arabic:"الْخَافِضُ",meaning:"The Abaser",desc:"The One who lowers whoever He wills by His might. He humbles the arrogant and the enemies of truth.",variants:["al-khaafid","khaafid","khafid"]},
+  {display:"Ar-Raafi'",arabic:"الرَّافِعُ",meaning:"The Exalter",desc:"The One who raises whoever He wills. He elevates His believing slaves in honour and rank.",variants:["ar-raafi'","rafi","raafi","rafee"]},
+  {display:"Al-Mu'izz",arabic:"الْمُعِزُّ",meaning:"The Honourer",desc:"The One who gives honour and dignity to whoever He wills from among His creation.",variants:["al-mu'izz","muizz","muiz","moiz"]},
+  {display:"Al-Mudhill",arabic:"الْمُذِلُّ",meaning:"The Dishonourer",desc:"The One who humiliates whoever He wills. No one can give honour to those He has chosen to humble.",variants:["al-mudhill","mudhill","muzil","muzill"]},
+  {display:"As-Samee'",arabic:"السَّمِيعُ",meaning:"The All-Hearing",desc:"The One who hears all sounds and voices, apparent and hidden, near and far, without any limitation.",variants:["as-samee'","samee","sami"]},
+  {display:"Al-Baseer",arabic:"الْبَصِيرُ",meaning:"The All-Seeing",desc:"The One who sees all things visible and invisible, large and small, in the light and in the darkness.",variants:["al-baseer","baseer","basir"]},
+  {display:"Al-Hakam",arabic:"الْحَكَمُ",meaning:"The Judge",desc:"The One who judges between His creation with absolute justice. His judgment is final and perfect.",variants:["al-hakam","hakam","hakm"]},
+  {display:"Al-'Adl",arabic:"الْعَدْلُ",meaning:"The Just",desc:"The One who is most just in all His actions and judgments. There is no injustice in anything He does.",variants:["al-'adl","adl","adil","aadil"]},
+  {display:"Al-Lateef",arabic:"اللَّطِيفُ",meaning:"The Subtle One",desc:"The One who is kind and gentle to His slaves. He knows the finest details of all things.",variants:["al-lateef","lateef","latif","lathif"]},
+  {display:"Al-Khabeer",arabic:"الْخَبِيرُ",meaning:"The All-Aware",desc:"The One who knows the hidden inner workings of all things. Nothing escapes His complete awareness.",variants:["al-khabeer","khabeer","khabir","kabeer"]},
+  {display:"Al-Haleem",arabic:"الْحَلِيمُ",meaning:"The Forbearing",desc:"The One who delays punishment for those who sin, giving them opportunity to repent and return to Him.",variants:["al-haleem","haleem","halim"]},
+  {display:"Al-'Azeem",arabic:"الْعَظِيمُ",meaning:"The Magnificent",desc:"The One deserving the attributes of glory and majesty. His greatness is beyond all comprehension.",variants:["al-'azeem","azeem","azim"]},
+  {display:"Al-Ghafoor",arabic:"الْغَفُورُ",meaning:"The Forgiving",desc:"The One who forgives all sins no matter how great. His forgiveness covers all who sincerely repent.",variants:["al-ghafoor","ghafoor","ghafur","gafoor"]},
+  {display:"Ash-Shakoor",arabic:"الشَّكُورُ",meaning:"The Appreciative",desc:"The One who rewards generously even the smallest of good deeds. He acknowledges and appreciates all worship.",variants:["ash-shakoor","shakoor","shakur"]},
+  {display:"Al-'Aliyy",arabic:"الْعَلِيُّ",meaning:"The Most High",desc:"The One who is above His creation both in rank and essence. He is exalted above all things.",variants:["al-'aliyy","aliyy","ali","alee"]},
+  {display:"Al-Kabeer",arabic:"الْكَبِيرُ",meaning:"The Most Great",desc:"The One who is greater than everything in status, rank and magnitude beyond all comprehension.",variants:["al-kabeer","kabeer","kabir"]},
+  {display:"Al-Hafeez",arabic:"الْحَفِيظُ",meaning:"The Preserver",desc:"The One who protects and preserves all things. He maintains a precise record of all deeds.",variants:["al-hafeez","hafeez","hafiz","hafez"]},
+  {display:"Al-Muqeet",arabic:"الْمُقِيتُ",meaning:"The Nourisher",desc:"The One who has the power to sustain all things. He provides the nourishment each creation needs.",variants:["al-muqeet","muqeet","muqit","mukit"]},
+  {display:"Al-Haseeb",arabic:"الْحَسِيبُ",meaning:"The Reckoner",desc:"The One who takes account of all things. He is sufficient as a witness and reckoner for His creation.",variants:["al-haseeb","haseeb","hasib"]},
+  {display:"Al-Jaleel",arabic:"الْجَلِيلُ",meaning:"The Majestic",desc:"The One who possesses all attributes of majesty and greatness. He is sublime and magnificent.",variants:["al-jaleel","jaleel","jalil"]},
+  {display:"Al-Kareem",arabic:"الْكَرِيمُ",meaning:"The Most Generous",desc:"The One who is most generous and bountiful. He gives abundantly without expecting anything in return.",variants:["al-kareem","kareem","karim"]},
+  {display:"Ar-Raqeeb",arabic:"الرَّقِيبُ",meaning:"The Watchful",desc:"The One who observes and watches over all things at all times. Nothing escapes His watchful care.",variants:["ar-raqeeb","raqeeb","raqib"]},
+  {display:"Al-Mujeeb",arabic:"الْمُجِيبُ",meaning:"The Responsive",desc:"The One who answers the prayers and supplications of His slaves whenever they call upon Him.",variants:["al-mujeeb","mujeeb","mujib"]},
+  {display:"Al-Waasi'",arabic:"الْوَاسِعُ",meaning:"The All-Encompassing",desc:"The One whose mercy, knowledge and generosity encompass all of creation without any limit.",variants:["al-waasi'","wasi","waasi","wasee"]},
+  {display:"Al-Hakeem",arabic:"الْحَكِيمُ",meaning:"The All-Wise",desc:"The One who is perfectly wise in all His actions and decrees. His wisdom is absolute and complete.",variants:["al-hakeem","hakeem","hakim"]},
+  {display:"Al-Wadud",arabic:"الْوَدُودُ",meaning:"The Most Loving",desc:"The One who loves His righteous believing slaves and they love Him. His love is pure and infinite.",variants:["al-wadud","wadud","wadood"]},
+  {display:"Al-Majeed",arabic:"الْمَجِيدُ",meaning:"The Most Glorious",desc:"The One who is most glorious and full of honour. His glory and majesty are beyond all description.",variants:["al-majeed","majeed","majid"]},
+  {display:"Al-Ba'ith",arabic:"الْبَاعِثُ",meaning:"The Resurrector",desc:"The One who resurrects His creation after death on the Day of Judgement for final reckoning.",variants:["al-ba'ith","baith","ba'is","bais"]},
+  {display:"Ash-Shaheed",arabic:"الشَّهِيدُ",meaning:"The Witness",desc:"The One who is present everywhere and witnesses all things openly and secretly at all times.",variants:["ash-shaheed","shaheed","shahid","shahed"]},
+  {display:"Al-Haqq",arabic:"الْحَقُّ",meaning:"The Truth",desc:"The One whose existence is true and eternal. He alone is the ultimate reality and absolute truth.",variants:["al-haqq","haqq","haq"]},
+  {display:"Al-Wakeel",arabic:"الْوَكِيلُ",meaning:"The Trustee",desc:"The One who is the perfect trustee and guardian. Whoever puts their trust in Him will never be let down.",variants:["al-wakeel","wakeel","wakil"]},
+  {display:"Al-Qawiyy",arabic:"الْقَوِيُّ",meaning:"The All-Powerful",desc:"The One with complete power over all things. His strength is unlimited and never diminishes.",variants:["al-qawiyy","qawi","qawiyy","kawi"]},
+  {display:"Al-Mateen",arabic:"الْمَتِينُ",meaning:"The Firm",desc:"The One with extreme power and strength. His firmness is absolute and cannot be overcome.",variants:["al-mateen","mateen","matin"]},
+  {display:"Al-Waliyy",arabic:"الْوَلِيُّ",meaning:"The Protecting Friend",desc:"The One who is the guardian and protector of the believers. He supports and aids those who obey Him.",variants:["al-waliyy","wali","waliyy"]},
+  {display:"Al-Hameed",arabic:"الْحَمِيدُ",meaning:"The Praiseworthy",desc:"The One who is deserving of all praise and gratitude. All praise belongs exclusively to Him.",variants:["al-hameed","hameed","hamid"]},
+  {display:"Al-Muhsi",arabic:"الْمُحْصِي",meaning:"The Accounter",desc:"The One who counts and records everything precisely. Nothing is too small or large to escape His count.",variants:["al-muhsi","muhsi","mohsi"]},
+  {display:"Al-Mubdi'",arabic:"الْمُبْدِئُ",meaning:"The Originator",desc:"The One who started creation from nothing without any prior example or model to follow.",variants:["al-mubdi'","mubdi"]},
+  {display:"Al-Mu'eed",arabic:"الْمُعِيدُ",meaning:"The Restorer",desc:"The One who restores and brings back creation after its extinction on the Day of Resurrection.",variants:["al-mu'eed","mueed","mu'id","moeid"]},
+  {display:"Al-Muhyi",arabic:"الْمُحْيِي",meaning:"The Giver of Life",desc:"The One who gives life to everything. He alone has the power to bring the living from the dead.",variants:["al-muhyi","muhyi","mohyi"]},
+  {display:"Al-Mumeet",arabic:"الْمُمِيتُ",meaning:"The Bringer of Death",desc:"The One who causes death to whomever He wills at the appointed time He has decreed.",variants:["al-mumeet","mumeet","mumit"]},
+  {display:"Al-Hayy",arabic:"الْحَيُّ",meaning:"The Ever-Living",desc:"The One who is alive and whose life is unlike any other. His life had no beginning and has no end.",variants:["al-hayy","hayy","hai","hay"]},
+  {display:"Al-Qayyoom",arabic:"الْقَيُّومُ",meaning:"The Self-Subsisting",desc:"The One who sustains and maintains all of existence. He is self-sufficient and needs nothing.",variants:["al-qayyoom","qayyoom","qayyum","kayyum"]},
+  {display:"Al-Waajid",arabic:"الْوَاجِدُ",meaning:"The Finder",desc:"The One who finds whatever He wills whenever He wills. He is never in need of anything.",variants:["al-waajid","waajid","wajid"]},
+  {display:"Al-Maajid",arabic:"الْمَاجِدُ",meaning:"The Noble",desc:"The One who is most noble and generous. He is characterised by honour, greatness and generosity.",variants:["al-maajid","maajid","majid"]},
+  {display:"Al-Waahid",arabic:"الْوَاحِدُ",meaning:"The One",desc:"The One without any partner, equal or rival. He is unique and singular in all His attributes.",variants:["al-waahid","waahid","wahid"]},
+  {display:"Al-Ahad",arabic:"الْأَحَدُ",meaning:"The Unique",desc:"The One who is absolutely unique with no comparable, no partner and no equal in any way.",variants:["al-ahad","ahad"]},
+  {display:"As-Samad",arabic:"الصَّمَدُ",meaning:"The Eternal",desc:"The One who all creation turns to in times of need. He is self-sufficient and depends on no one.",variants:["as-samad","samad"]},
+  {display:"Al-Qaadir",arabic:"الْقَادِرُ",meaning:"The Capable",desc:"The One who is capable of doing everything. His power is absolute and nothing is beyond Him.",variants:["al-qaadir","qaadir","qadir","kadir"]},
+  {display:"Al-Muqtadir",arabic:"الْمُقْتَدِرُ",meaning:"The All-Powerful",desc:"The One with complete and perfect power over all things. His ability and strength are limitless.",variants:["al-muqtadir","muqtadir","mukhtadir"]},
+  {display:"Al-Muqaddim",arabic:"الْمُقَدِّمُ",meaning:"The Expediter",desc:"The One who brings forward and gives precedence to whatever and whoever He wills by His wisdom.",variants:["al-muqaddim","muqaddim","mukaddim"]},
+  {display:"Al-Mu'akhkhir",arabic:"الْمُؤَخِّرُ",meaning:"The Delayer",desc:"The One who delays and puts back whatever He wills according to His perfect wisdom and plan.",variants:["al-mu'akhkhir","muakhkhir","muakhir"]},
+  {display:"Al-Awwal",arabic:"الْأَوَّلُ",meaning:"The First",desc:"The One who existed before all creation with no beginning. He is the first with nothing before Him.",variants:["al-awwal","awwal","awal"]},
+  {display:"Al-Akhir",arabic:"الْآخِرُ",meaning:"The Last",desc:"The One who will remain after all creation has perished with no end. He is eternal without end.",variants:["al-akhir","akhir","aakhir"]},
+  {display:"Az-Zaahir",arabic:"الظَّاهِرُ",meaning:"The Manifest",desc:"The One whose existence is manifest through signs and creation. He is apparent through His evidence.",variants:["az-zaahir","zaahir","zahir","zaher"]},
+  {display:"Al-Baatin",arabic:"الْبَاطِنُ",meaning:"The Hidden",desc:"The One whose essence cannot be perceived by human senses. His reality is beyond all comprehension.",variants:["al-baatin","baatin","batin"]},
+  {display:"Al-Waali",arabic:"الْوَالِي",meaning:"The Governor",desc:"The One who governs and administers all of creation. He manages all affairs with complete control.",variants:["al-waali","waali","wali"]},
+  {display:"Al-Muta'ali",arabic:"الْمُتَعَالِي",meaning:"The Most Exalted",desc:"The One who is too high and exalted to have any attribute of the creation. He is supremely elevated.",variants:["al-muta'ali","mutaali","mutali"]},
+  {display:"Al-Barr",arabic:"الْبَرُّ",meaning:"The Source of Goodness",desc:"The One who is kind and generous to His slaves. He rewards small deeds with immense goodness.",variants:["al-barr","barr","bar"]},
+  {display:"At-Tawwab",arabic:"التَّوَّابُ",meaning:"The Ever-Returning",desc:"The One who constantly accepts repentance from His slaves and turns back to them with mercy.",variants:["at-tawwab","tawwab","tawab"]},
+  {display:"Al-Muntaqim",arabic:"الْمُنْتَقِمُ",meaning:"The Avenger",desc:"The One who victoriously prevails over His enemies and punishes those who persist in wrongdoing.",variants:["al-muntaqim","muntaqim","muntakim"]},
+  {display:"Al-'Afuww",arabic:"الْعَفُوُّ",meaning:"The Pardoner",desc:"The One who pardons and erases sins completely. He wipes away sins as though they never existed.",variants:["al-'afuww","afuww","afuw","afw"]},
+  {display:"Ar-Ra'oof",arabic:"الرَّؤُوفُ",meaning:"The Most Kind",desc:"The One who is most compassionate and kind. His kindness is intense and covers all of creation.",variants:["ar-ra'oof","raouf","rauf","raoof"]},
+  {display:"Malik-ul-Mulk",arabic:"مَالِكُ الْمُلْكِ",meaning:"Owner of all Sovereignty",desc:"The One who controls all dominion. He gives and takes away power from whoever He wills.",variants:["malik-ul-mulk","malik ul mulk","malikul mulk","malik al mulk"]},
+  {display:"Dhul-Jalaali-wal-Ikraam",arabic:"ذُو الْجَلَالِ وَالْإِكْرَامِ",meaning:"Lord of Majesty and Bounty",desc:"The One who possesses all greatness and honour. He is worthy of being glorified and praised.",variants:["dhul-jalaali-wal-ikraam","dhul jalali wal ikram","zul jalali wal ikram"]},
+  {display:"Al-Muqsit",arabic:"الْمُقْسِطُ",meaning:"The Equitable",desc:"The One who is just in all His dealings. He establishes equity and fairness throughout creation.",variants:["al-muqsit","muqsit","mukshit"]},
+  {display:"Al-Jaami'",arabic:"الْجَامِعُ",meaning:"The Gatherer",desc:"The One who gathers all of creation on the Day of Judgement. He brings together what He wills.",variants:["al-jaami'","jaami","jami"]},
+  {display:"Al-Ghaniyy",arabic:"الْغَنِيُّ",meaning:"The Self-Sufficient",desc:"The One who is completely free of all needs. He is rich and independent of all His creation.",variants:["al-ghaniyy","ghaniyy","ghani"]},
+  {display:"Al-Mughni",arabic:"الْمُغْنِي",meaning:"The Enricher",desc:"The One who enriches and satisfies whoever He wills from His creation. He removes all poverty.",variants:["al-mughni","mughni","mugni"]},
+  {display:"Al-Maani'",arabic:"الْمَانِعُ",meaning:"The Preventer",desc:"The One who prevents and withholds what He wills in order to protect and show mercy to His slaves.",variants:["al-maani'","maani","mani"]},
+  {display:"Ad-Daarr",arabic:"الضَّارُّ",meaning:"The Distressor",desc:"The One who allows harm to reach whoever He wills as a test or punishment according to His wisdom.",variants:["ad-daarr","daarr","darr","zarr"]},
+  {display:"An-Naafi'",arabic:"النَّافِعُ",meaning:"The Benefactor",desc:"The One who grants benefit to whoever He wills. All benefit in the universe comes solely from Him.",variants:["an-naafi'","naafi","nafi"]},
+  {display:"An-Noor",arabic:"النُّورُ",meaning:"The Light",desc:"The One who is the light of the heavens and earth. He guides whoever He wills to His divine light.",variants:["an-noor","noor","nur"]},
+  {display:"Al-Haadi",arabic:"الْهَادِي",meaning:"The Guide",desc:"The One who guides His creation to what is beneficial for them in this life and in the Hereafter.",variants:["al-haadi","haadi","hadi"]},
+  {display:"Al-Badee'",arabic:"الْبَدِيعُ",meaning:"The Incomparable",desc:"The One who created creation in a unique and unprecedented way with no model or prior example.",variants:["al-badee'","badee","badi"]},
+  {display:"Al-Baaqi",arabic:"الْبَاقِي",meaning:"The Everlasting",desc:"The One whose existence has no end. He will remain forever after all of His creation has perished.",variants:["al-baaqi","baaqi","baqi"]},
+  {display:"Al-Waarith",arabic:"الْوَارِثُ",meaning:"The Inheritor",desc:"The One who remains after all creation perishes and to whom all things ultimately return.",variants:["al-waarith","waarith","warith"]},
+  {display:"Ar-Rasheed",arabic:"الرَّشِيدُ",meaning:"The Guide to the Right Path",desc:"The One who guides all affairs to their proper conclusion with perfect wisdom and direction.",variants:["ar-rasheed","rasheed","rashid"]},
+  {display:"As-Saboor",arabic:"الصَّبُورُ",meaning:"The Patient One",desc:"The One who does not hasten punishment upon those who disobey Him but gives them time to repent.",variants:["as-saboor","saboor","sabur"]}
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let state = {
+  guessed: new Set(),
+  timeLeft: 300,
+  chosenTime: 300,
+  started: false,
+  finished: false,
+  freePlay: false,
+  paused: false,
+  scoreSaved: false,
+  timerInterval: null
+};
+
+// ─────────────────────────────────────────────
+// STORAGE
+// ─────────────────────────────────────────────
+const S = {
+  get: k => { try { return JSON.parse(localStorage.getItem(k)); } catch(e) { return null; } },
+  set: (k,v) => localStorage.setItem(k, JSON.stringify(v))
+};
+
+function loadStorage() {
+  const pn = S.get('playerName') || '';
+  const best = S.get('bestScore') || 0;
+  const last = S.get('lastScore') || 0;
+  const games = S.get('totalGames') || 0;
+  const guessed = S.get('guessedNames') || {};
+  const weak = S.get('weakNames') || {};
+  const easy = Object.keys(guessed).filter(k => guessed[k] >= 3 && !weak[k]).length;
+
+  document.getElementById('dashAvatar').textContent = pn ? pn[0].toUpperCase() : '?';
+  document.getElementById('dashName').textContent = pn || 'Set your name';
+  document.getElementById('dashName').style.color = pn ? 'var(--text)' : 'var(--text3)';
+  document.getElementById('dashGames').textContent = games + ' GAMES PLAYED';
+  document.getElementById('bestScore').textContent = best;
+  document.getElementById('lastScore').textContent = last;
+  document.getElementById('easyCount').textContent = easy;
+  document.getElementById('menuAvatar').textContent = pn ? pn[0].toUpperCase() : '?';
+  document.getElementById('menuName').textContent = pn || 'Player';
+  document.getElementById('menuBest').textContent = 'Best: ' + best + ' / 99';
+}
+
+// ─────────────────────────────────────────────
+// SCREENS
+// ─────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  if (id === 'learn') buildLearn();
+  if (id === 'dashboard') loadStorage();
+}
+
+// ─────────────────────────────────────────────
+// SPLASH
+// ─────────────────────────────────────────────
+document.getElementById('splash').addEventListener('click', () => {
+  showScreen('dashboard');
+  loadStorage();
+});
+
+// ─────────────────────────────────────────────
+// MENU
+// ─────────────────────────────────────────────
+function openMenu() {
+  document.getElementById('menuDrawer').classList.add('open');
+  document.getElementById('menuBackdrop').classList.add('show');
+}
+function closeMenu() {
+  document.getElementById('menuDrawer').classList.remove('open');
+  document.getElementById('menuBackdrop').classList.remove('show');
+}
+
+// ─────────────────────────────────────────────
+// NAME EDITOR
+// ─────────────────────────────────────────────
+function showNameEditor() {
+  document.getElementById('nameInput').value = S.get('playerName') || '';
+  document.getElementById('nameOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('nameInput').focus(), 200);
+}
+function saveName() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (name) S.set('playerName', name);
+  document.getElementById('nameOverlay').classList.remove('show');
+  loadStorage();
+}
+document.getElementById('nameOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
+});
+
+// ─────────────────────────────────────────────
+// TIME POPUP
+// ─────────────────────────────────────────────
+let chosenMinutes = 5;
+function showTimePopup() {
+  document.getElementById('timeNum').textContent = chosenMinutes;
+  document.getElementById('timeOverlay').classList.add('show');
+}
+function changeTime(d) {
+  chosenMinutes = Math.max(1, Math.min(60, chosenMinutes + d));
+  document.getElementById('timeNum').textContent = chosenMinutes;
+}
+document.getElementById('timeOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
+});
+
+// ─────────────────────────────────────────────
+// QUIZ
+// ─────────────────────────────────────────────
+function buildGrid() {
+  const grid = document.getElementById('wordGrid');
+  grid.innerHTML = '';
+  NAMES_DATA.forEach((n, i) => {
+    const tile = document.createElement('div');
+    tile.className = 'word-tile';
+    tile.textContent = n.display;
+    tile.id = 'tile-' + i;
+    grid.appendChild(tile);
+  });
+}
+
+function startQuiz() {
+  document.getElementById('timeOverlay').classList.remove('show');
+  state.guessed = new Set();
+  state.chosenTime = chosenMinutes * 60;
+  state.timeLeft = state.chosenTime;
+  state.started = false;
+  state.finished = false;
+  state.freePlay = false;
+  state.paused = false;
+  state.scoreSaved = false;
+  clearInterval(state.timerInterval);
+  buildGrid();
+  updateProgress();
+  updateTimer();
+  showScreen('quiz');
+  document.getElementById('quizInput').value = '';
+  document.getElementById('quizInput').focus();
+}
+
+function startIfNeeded() {
+  if (state.started || state.finished) return;
+  state.started = true;
+  state.timerInterval = setInterval(() => {
+    if (state.paused || state.freePlay || !state.started) return;
+    state.timeLeft--;
+    updateTimer();
+    if (state.timeLeft <= 0) {
+      clearInterval(state.timerInterval);
+      state.finished = true;
+      showEndOverlay();
+    }
+  }, 1000);
+}
+
+function updateTimer() {
+  const el = document.getElementById('timerVal');
+  if (state.freePlay) {
+    el.textContent = '∞';
+    el.className = 'timer-val free';
+    return;
+  }
+  const m = Math.floor(state.timeLeft / 60).toString().padStart(2,'0');
+  const s = (state.timeLeft % 60).toString().padStart(2,'0');
+  el.textContent = m + ':' + s;
+  const frac = state.timeLeft / state.chosenTime;
+  el.className = 'timer-val ' + (frac > .5 ? 'green' : frac > .25 ? 'yellow' : 'red');
+}
+
+function updateProgress() {
+  const n = state.guessed.size;
+  document.getElementById('progressText').textContent = n + ' / 99';
+  document.getElementById('progressFill').style.width = (n / 99 * 100) + '%';
+}
+
+function isCorrect(input, nameEntry) {
+  const t = input.toLowerCase().trim();
+  return nameEntry.variants.includes(t);
+}
+
+function submitGuess() {
+  const input = document.getElementById('quizInput');
+  const val = input.value.trim();
+  if (!val) return;
+  startIfNeeded();
+  const match = NAMES_DATA.find((n, i) => !state.guessed.has(i) && isCorrect(val, n));
+  if (match) {
+    const idx = NAMES_DATA.indexOf(match);
+    state.guessed.add(idx);
+    input.value = '';
+    updateProgress();
+    trackGuessed(match.display);
+    const tile = document.getElementById('tile-' + idx);
+    tile.classList.add('guessed','flash');
+    tile.addEventListener('animationend', () => tile.classList.remove('flash'), {once:true});
+    tile.scrollIntoView({behavior:'smooth', block:'center'});
+    if (state.guessed.size === 99) {
+      clearInterval(state.timerInterval);
+      state.finished = true;
+      setTimeout(showEndOverlay, 500);
+    }
+  } else {
+    input.value = '';
+    input.classList.add('shake');
+    input.addEventListener('animationend', () => input.classList.remove('shake'), {once:true});
+  }
+}
+
+document.getElementById('quizInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitGuess();
+  else startIfNeeded();
+});
+
+// ─────────────────────────────────────────────
+// PAUSE
+// ─────────────────────────────────────────────
+function togglePause() {
+  state.paused = !state.paused;
+  const overlay = document.getElementById('pauseOverlay');
+  const btn = document.getElementById('pauseBtn');
+  if (state.paused) {
+    overlay.classList.add('show');
+    btn.textContent = '▶';
+    document.getElementById('pauseScore').textContent = state.guessed.size + ' names found so far';
+  } else {
+    overlay.classList.remove('show');
+    btn.textContent = '⏸';
+  }
+}
+
+// ─────────────────────────────────────────────
+// END OVERLAY
+// ─────────────────────────────────────────────
+function showEndOverlay() {
+  const complete = state.guessed.size === 99;
+  document.getElementById('endIcon').textContent = complete ? '🏆' : '⏱️';
+  document.getElementById('endTitle').textContent = complete ? 'Perfect!' : "Time's Up!";
+  document.getElementById('endNum').textContent = state.guessed.size;
+  document.getElementById('endOverlay').classList.add('show');
+}
+
+function playAgain() {
+  saveScore();
+  document.getElementById('endOverlay').classList.remove('show');
+  startQuiz();
+}
+
+function enterFreePlay() {
+  clearInterval(state.timerInterval);
+  state.freePlay = true;
+  state.finished = false;
+  state.paused = false;
+  document.getElementById('endOverlay').classList.remove('show');
+  updateTimer();
+  document.getElementById('quizInput').focus();
+}
+
+function saveScore() {
+  if (state.scoreSaved || state.freePlay) return;
+  const score = state.guessed.size;
+  const best = S.get('bestScore') || 0;
+  S.set('lastScore', score);
+  if (score > best) S.set('bestScore', score);
+  S.set('totalGames', (S.get('totalGames') || 0) + 1);
+  trackMissed();
+  state.scoreSaved = true;
+}
+
+// ─────────────────────────────────────────────
+// TRACKING
+// ─────────────────────────────────────────────
+function trackGuessed(name) {
+  const d = S.get('guessedNames') || {};
+  d[name] = (d[name] || 0) + 1;
+  S.set('guessedNames', d);
+}
+
+function trackMissed() {
+  const guessed = S.get('guessedNames') || {};
+  const missed = S.get('missedNames') || {};
+  NAMES_DATA.forEach((n, i) => {
+    if (!state.guessed.has(i) && !guessed[n.display]) {
+      missed[n.display] = (missed[n.display] || 0) + 1;
+    }
+  });
+  S.set('missedNames', missed);
+}
+
+// ─────────────────────────────────────────────
+// LEARN
+// ─────────────────────────────────────────────
+let expandedLearnIdx = null;
+
+function buildLearn(filter = '') {
+  const list = document.getElementById('learnList');
+  list.innerHTML = '';
+  const lower = filter.toLowerCase();
+  NAMES_DATA.forEach((n, i) => {
+    if (filter && !n.display.toLowerCase().includes(lower) && !n.meaning.toLowerCase().includes(lower) && !n.arabic.includes(filter)) return;
+    const item = document.createElement('div');
+    item.className = 'learn-item' + (expandedLearnIdx === i ? ' expanded' : '');
+    item.innerHTML = `
+      <div class="learn-header" onclick="toggleLearn(${i})">
+        <div class="learn-num">${i+1}</div>
+        <div class="learn-info">
+          <div class="learn-translit">${n.display}</div>
+          <div class="learn-meaning">${n.meaning}</div>
+        </div>
+        <div class="learn-arabic">${n.arabic}</div>
+        <div class="learn-chevron">▼</div>
+      </div>
+      <div class="learn-body">
+        <div class="learn-arabic-large">${n.arabic}</div>
+        <div class="learn-desc">${n.desc}</div>
+      </div>`;
+    list.appendChild(item);
+  });
+}
+
+function toggleLearn(i) {
+  expandedLearnIdx = expandedLearnIdx === i ? null : i;
+  buildLearn(document.getElementById('learnSearch').value);
+  if (expandedLearnIdx !== null) {
+    setTimeout(() => {
+      const items = document.querySelectorAll('.learn-item');
+      const visible = Array.from(items).find(el => el.querySelector('.learn-header').getAttribute('onclick') === `toggleLearn(${i})`);
+      if (visible) visible.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }, 50);
+  }
+}
+
+function filterLearn() {
+  buildLearn(document.getElementById('learnSearch').value);
+}
+
+// ─────────────────────────────────────────────
+// VOICE
+// ─────────────────────────────────────────────
+let recognition = null;
+let isListening = false;
+
+function setupVoice() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    document.getElementById('micStatus').textContent = 'Voice not supported in this browser';
+    document.getElementById('micBtn').style.opacity = '.4';
+    document.getElementById('micBtn').style.pointerEvents = 'none';
+    return;
+  }
+  recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.continuous = false;
+  recognition.interimResults = true;
+
+  recognition.onresult = e => {
+    const transcript = Array.from(e.results).map(r => r[0].transcript).join('');
+    document.getElementById('micLive').textContent = transcript;
+    if (e.results[e.results.length-1].isFinal) {
+      document.getElementById('quizInput').value = transcript;
+      document.getElementById('micLive').textContent = '';
+      submitGuess();
+    }
+  };
+
+  recognition.onend = () => {
+    isListening = false;
+    document.getElementById('micBtn').classList.remove('listening');
+    document.getElementById('micStatus').textContent = 'Hold mic to speak';
+    document.getElementById('micStatus').classList.remove('listening');
+  };
+
+  recognition.onerror = () => {
+    isListening = false;
+    document.getElementById('micBtn').classList.remove('listening');
+    document.getElementById('micStatus').textContent = 'Hold mic to speak';
+    document.getElementById('micStatus').classList.remove('listening');
+  };
+}
+
+const micBtn = document.getElementById('micBtn');
+micBtn.addEventListener('mousedown', startVoice);
+micBtn.addEventListener('touchstart', e => { e.preventDefault(); startVoice(); }, {passive:false});
+micBtn.addEventListener('mouseup', stopVoice);
+micBtn.addEventListener('mouseleave', stopVoice);
+micBtn.addEventListener('touchend', stopVoice);
+
+function startVoice() {
+  if (!recognition || isListening) return;
+  startIfNeeded();
+  isListening = true;
+  micBtn.classList.add('listening');
+  micBtn.textContent = '🎙';
+  document.getElementById('micStatus').textContent = 'Listening…';
+  document.getElementById('micStatus').classList.add('listening');
+  try { recognition.start(); } catch(e) {}
+}
+
+function stopVoice() {
+  if (!recognition || !isListening) return;
+  try { recognition.stop(); } catch(e) {}
+}
+
+// ─────────────────────────────────────────────
+// PWA MANIFEST (injected)
+// ─────────────────────────────────────────────
+const manifest = {
+  name: "99 Names · Asma-ul-Husna Quiz",
+  short_name: "99 Names",
+  description: "How many names of Allah do you know?",
+  start_url: "/",
+  display: "standalone",
+  background_color: "#080810",
+  theme_color: "#080810",
+  icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%236366f1'/><text y='.9em' font-size='60' x='50%' dominant-baseline='middle' text-anchor='middle'>☪</text></svg>", sizes: "any", type: "image/svg+xml" }]
+};
+const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+const link = document.createElement('link');
+link.rel = 'manifest'; link.href = URL.createObjectURL(blob);
+document.head.appendChild(link);
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+setupVoice();
+loadStorage();
+</script>
+</body>
+</html>
+```
+
+Now let me copy it to outputs:
+<function_calls>
+<invoke name="bash_tool">
+<parameter name="command">cp /home/claude/99names/index.html /
