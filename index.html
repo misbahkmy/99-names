@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#080810">
+<meta name="theme-color" content="#0F5E4A">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="99 Names">
 <meta name="description" content="How many names of Allah do you know?">
 <title>99 Names · Asma-ul-Husna Quiz</title>
@@ -13,324 +14,278 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #080810;
-  --bg2: #0d0d1a;
-  --bg3: #111120;
-  --border: #1a1a2e;
-  --border2: #252540;
-  --text: #e8e8f2;
-  --text2: #9090b0;
-  --text3: #505070;
-  --accent: #6366f1;
-  --accent2: #a78bfa;
-  --green: #34d399;
-  --yellow: #fbbf24;
-  --red: #f87171;
-  --gold: #f59e0b;
+  --emerald:      #0F5E4A;
+  --emerald-dark: #0a4235;
+  --emerald-deep: #083628;
+  --teal:         #2BAE9B;
+  --gold:         #D4A64A;
+  --red:          #C94A4A;
+  --bg:           #F6F3EA;
+  --bg2:          #E6F2EF;
+  --bg3:          #daeee9;
+  --text:         #1F2933;
+  --text2:        #3d4f5c;
+  --text3:        #7a8c96;
+  --border:       #D1D5DB;
+  --border2:      #b8c4c0;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:'DM Mono',monospace; }
 
 /* ── Screens ── */
-.screen { position: fixed; inset: 0; display: flex; flex-direction: column; overflow: hidden; transition: opacity .4s, transform .4s; }
-.screen.hidden { opacity: 0; pointer-events: none; transform: translateY(20px); }
+.screen { position:fixed; inset:0; display:flex; flex-direction:column; overflow:hidden; transition:opacity .4s,transform .4s; }
+.screen.hidden { opacity:0; pointer-events:none; transform:translateY(16px); }
 
 /* ── Splash ── */
-#splash { background: var(--bg); align-items: center; justify-content: center; gap: 0; cursor: pointer; }
-#splash::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 30% 20%, rgba(99,102,241,.12) 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 80%, rgba(167,139,250,.08) 0%, transparent 60%);
-}
-.splash-orb {
-  width: 120px; height: 120px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 48px; margin-bottom: 32px;
-  box-shadow: 0 0 60px rgba(99,102,241,.4);
-  animation: pulse-orb 3s ease-in-out infinite;
-}
-@keyframes pulse-orb { 0%,100%{box-shadow:0 0 60px rgba(99,102,241,.4)} 50%{box-shadow:0 0 100px rgba(99,102,241,.7)} }
-.splash-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,6vw,42px); font-weight: 300; font-style: italic; color: var(--text); letter-spacing: 1px; text-align: center; }
-.splash-subtitle { font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: var(--accent2); margin-top: 6px; text-align: center; }
-.splash-tagline { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text3); margin-top: 20px; font-style: italic; text-align: center; }
-.splash-tap { font-size: 11px; letter-spacing: 3px; color: var(--text3); margin-top: 60px; text-transform: uppercase; animation: blink 2s ease-in-out infinite; }
+#splash { background:var(–emerald-deep); align-items:center; justify-content:center; cursor:pointer; }
+#splash::before { content:’’; position:absolute; inset:0;
+background:radial-gradient(ellipse at 30% 20%,rgba(212,166,74,.15) 0%,transparent 60%),
+radial-gradient(ellipse at 70% 80%,rgba(43,174,155,.10) 0%,transparent 60%); }
+.splash-orb { width:120px; height:120px; border-radius:50%; background:linear-gradient(135deg,var(–emerald),var(–teal));
+border:3px solid var(–gold); display:flex; align-items:center; justify-content:center;
+font-size:48px; margin-bottom:32px; box-shadow:0 0 60px rgba(212,166,74,.35);
+animation:pulse-orb 3s ease-in-out infinite; }
+@keyframes pulse-orb { 0%,100%{box-shadow:0 0 60px rgba(212,166,74,.35)} 50%{box-shadow:0 0 100px rgba(212,166,74,.6)} }
+.splash-title { font-family:‘Cormorant Garamond’,serif; font-size:clamp(28px,6vw,42px); font-weight:300; font-style:italic; color:#F6F3EA; letter-spacing:1px; text-align:center; }
+.splash-subtitle { font-size:11px; letter-spacing:6px; text-transform:uppercase; color:var(–gold); margin-top:6px; text-align:center; }
+.splash-tagline { font-family:‘Cormorant Garamond’,serif; font-size:16px; color:rgba(246,243,234,.5); margin-top:20px; font-style:italic; text-align:center; }
+.splash-tap { font-size:11px; letter-spacing:3px; color:rgba(246,243,234,.35); margin-top:60px; text-transform:uppercase; animation:blink 2s ease-in-out infinite; }
 @keyframes blink { 0%,100%{opacity:.3} 50%{opacity:.8} }
 
 /* ── Nav ── */
-.nav {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 20px; padding-top: max(16px, env(safe-area-inset-top));
-  background: rgba(8,8,16,.9); backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border); flex-shrink: 0; position: relative; z-index: 10;
-}
-.nav-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: var(--text); }
-.nav-btn { background: none; border: none; color: var(--accent2); font-family: inherit; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px; }
-.nav-btn svg { width: 18px; height: 18px; }
-.hamburger { flex-direction: column; gap: 4px; padding: 8px; }
-.hamburger span { display: block; width: 20px; height: 2px; background: var(--accent2); border-radius: 2px; transition: .3s; }
+.nav { display:flex; align-items:center; justify-content:space-between;
+padding:14px 20px; padding-top:max(14px,env(safe-area-inset-top));
+background:var(–emerald); border-bottom:1px solid rgba(212,166,74,.4);
+flex-shrink:0; position:relative; z-index:10; }
+.nav-title { font-family:‘Cormorant Garamond’,serif; font-size:17px; font-style:italic; color:#F6F3EA; }
+.nav-btn { background:none; border:none; color:rgba(246,243,234,.8); font-family:inherit; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px; padding:6px; }
+.nav-btn svg { width:18px; height:18px; stroke:rgba(246,243,234,.8); }
+.hamburger { flex-direction:column; gap:4px; padding:8px; }
+.hamburger span { display:block; width:20px; height:2px; background:rgba(246,243,234,.8); border-radius:2px; }
 
 /* ── Dashboard ── */
-#dashboard { background: var(--bg); }
-#dashboard::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse at 20% 10%, rgba(99,102,241,.07) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 90%, rgba(167,139,250,.05) 0%, transparent 50%);
-}
-.dashboard-scroll { flex: 1; overflow-y: auto; padding: 20px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 14px; }
+#dashboard { background:var(–bg); }
+.dashboard-scroll { flex:1; overflow-y:auto; padding:20px; padding-bottom:40px; display:flex; flex-direction:column; gap:14px; }
+.card { background:var(–bg2); border:1px solid var(–border); border-radius:16px; padding:18px; position:relative; overflow:hidden; }
+.card::before { content:’’; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.4) 0%,transparent 60%); pointer-events:none; }
+.player-card { display:flex; align-items:center; gap:14px; }
+.avatar { width:54px; height:54px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg,var(–emerald),var(–teal)); border:2px solid var(–gold); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:600; color:white; }
+.player-info { flex:1; }
+.player-name { font-size:17px; font-weight:500; color:var(–text); }
+.player-games { font-size:11px; color:var(–text3); margin-top:3px; letter-spacing:1px; }
+.edit-btn { background:none; border:none; cursor:pointer; color:var(–teal); font-size:20px; padding:4px; }
+.easy-card { background:linear-gradient(135deg,rgba(15,94,74,.08),rgba(43,174,155,.04)); border-color:rgba(15,94,74,.2); }
+.easy-card-inner { display:flex; align-items:center; gap:16px; }
+.easy-icon { font-size:30px; }
+.easy-text { flex:1; }
+.easy-label { font-size:11px; color:var(–emerald); letter-spacing:1px; text-transform:uppercase; font-weight:500; }
+.easy-desc { font-size:11px; color:var(–text3); margin-top:3px; }
+.easy-count { font-family:‘DM Mono’,monospace; font-size:34px; font-weight:500; color:var(–emerald); }
+.easy-denom { font-size:12px; color:var(–text3); }
+.score-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.score-card { background:var(–bg2); border:1px solid var(–border); border-radius:14px; padding:16px; }
+.score-label { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(–text3); display:flex; align-items:center; gap:6px; }
+.score-label span { font-size:14px; }
+.score-val { font-family:‘DM Mono’,monospace; font-size:34px; font-weight:500; color:var(–text); margin-top:8px; }
+.score-sub { font-size:10px; color:var(–text3); margin-top:2px; }
 
-/* Cards */
-.card {
-  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
-  position: relative; overflow: hidden;
-}
-.card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.02) 0%, transparent 60%); pointer-events: none; }
+/* Display preference selector on dashboard */
+.pref-section { background:var(–bg2); border:1px solid var(–border); border-radius:14px; padding:16px; }
+.pref-title { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(–text3); margin-bottom:12px; }
+.pref-options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.pref-btn { padding:10px 8px; border-radius:10px; border:1.5px solid var(–border); background:var(–bg);
+font-family:‘DM Mono’,monospace; font-size:11px; color:var(–text3); cursor:pointer; text-align:center; transition:all .2s; }
+.pref-btn.active { border-color:var(–emerald); background:rgba(15,94,74,.08); color:var(–emerald); font-weight:500; }
 
-/* Player card */
-.player-card { display: flex; align-items: center; gap: 14px; }
-.avatar {
-  width: 54px; height: 54px; border-radius: 50%; flex-shrink: 0;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; font-weight: 600; color: white;
-}
-.player-info { flex: 1; }
-.player-name { font-size: 17px; font-weight: 500; color: var(--text); }
-.player-games { font-size: 11px; color: var(--text3); margin-top: 3px; letter-spacing: 1px; }
-.edit-btn { background: none; border: none; cursor: pointer; color: var(--accent); font-size: 20px; padding: 4px; }
-
-/* Easy names card */
-.easy-card { background: linear-gradient(135deg, rgba(52,211,153,.08), rgba(52,211,153,.03)); border-color: rgba(52,211,153,.2); }
-.easy-card-inner { display: flex; align-items: center; gap: 16px; }
-.easy-icon { font-size: 32px; }
-.easy-text { flex: 1; }
-.easy-label { font-size: 12px; color: var(--green); letter-spacing: 1px; text-transform: uppercase; }
-.easy-desc { font-size: 11px; color: var(--text3); margin-top: 3px; }
-.easy-count { font-family: 'DM Mono', monospace; font-size: 36px; font-weight: 500; color: var(--green); white-space: nowrap; }
-.easy-denom { font-size: 12px; color: var(--text3); }
-
-/* Score row */
-.score-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.score-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
-.score-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); display: flex; align-items: center; gap: 6px; }
-.score-label span { font-size: 14px; }
-.score-val { font-family: 'DM Mono', monospace; font-size: 34px; font-weight: 500; color: var(--text); margin-top: 8px; }
-.score-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
-
-/* Buttons */
-.btn-primary {
-  width: 100%; padding: 16px; border: none; border-radius: 14px; cursor: pointer;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  color: white; font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500;
-  letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px;
-  box-shadow: 0 8px 32px rgba(99,102,241,.3); transition: transform .15s, box-shadow .15s;
-}
-.btn-primary:active { transform: scale(.98); box-shadow: 0 4px 16px rgba(99,102,241,.2); }
-.btn-secondary {
-  width: 100%; padding: 14px; border: 1px solid var(--border2); border-radius: 14px; cursor: pointer;
-  background: var(--bg2); color: var(--accent2); font-family: 'DM Mono', monospace;
-  font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: border-color .2s;
-}
-.btn-secondary:active { border-color: var(--accent); }
-.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn-primary { width:100%; padding:16px; border:none; border-radius:14px; cursor:pointer;
+background:linear-gradient(135deg,var(–emerald),var(–teal)); color:white;
+font-family:‘DM Mono’,monospace; font-size:15px; font-weight:500; letter-spacing:1px;
+display:flex; align-items:center; justify-content:center; gap:10px;
+box-shadow:0 6px 20px rgba(15,94,74,.22); transition:transform .15s; }
+.btn-primary:active { transform:scale(.98); }
+.btn-secondary { width:100%; padding:14px; border:1.5px solid var(–emerald); border-radius:14px; cursor:pointer;
+background:var(–bg2); color:var(–emerald); font-family:‘DM Mono’,monospace;
+font-size:14px; display:flex; align-items:center; justify-content:center; gap:8px; transition:background .2s; }
+.btn-secondary:active { background:var(–bg3); }
 
 /* ── Overlays ── */
-.overlay {
-  position: fixed; inset: 0; background: rgba(4,4,12,.85); backdrop-filter: blur(8px);
-  display: flex; align-items: center; justify-content: center; z-index: 100;
-  opacity: 0; pointer-events: none; transition: opacity .3s;
-}
-.overlay.show { opacity: 1; pointer-events: all; }
-.modal {
-  background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px;
-  padding: 28px; width: min(380px, calc(100vw - 40px)); max-height: 85vh; overflow-y: auto;
-  transform: scale(.95); transition: transform .3s;
-}
-.overlay.show .modal { transform: scale(1); }
-.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--text); margin-bottom: 6px; text-align: center; }
-.modal-sub { font-size: 12px; color: var(--text3); text-align: center; margin-bottom: 24px; }
-.modal input {
-  width: 100%; padding: 14px; background: var(--bg3); border: 1px solid var(--border2);
-  border-radius: 10px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 15px;
-  outline: none; margin-bottom: 16px;
-}
-.modal input:focus { border-color: var(--accent); }
-
-/* Time picker */
-.time-picker { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
-.time-btn { background: none; border: none; color: var(--accent); font-size: 32px; cursor: pointer; padding: 8px 16px; transition: transform .1s; }
-.time-btn:active { transform: scale(.9); }
-.time-display { text-align: center; }
-.time-num { font-family: 'DM Mono', monospace; font-size: 52px; font-weight: 500; color: var(--text); line-height: 1; }
-.time-unit { font-size: 12px; color: var(--text3); letter-spacing: 2px; margin-top: 4px; }
+.overlay { position:fixed; inset:0; background:rgba(10,30,22,.75); backdrop-filter:blur(8px);
+display:flex; align-items:center; justify-content:center; z-index:100;
+opacity:0; pointer-events:none; transition:opacity .3s; }
+.overlay.show { opacity:1; pointer-events:all; }
+.modal { background:var(–bg); border:1.5px solid var(–border); border-radius:20px;
+padding:28px; width:min(380px,calc(100vw - 40px)); max-height:85vh; overflow-y:auto;
+transform:scale(.95); transition:transform .3s; box-shadow:0 20px 60px rgba(15,94,74,.18); }
+.overlay.show .modal { transform:scale(1); }
+.modal-title { font-family:‘Cormorant Garamond’,serif; font-size:22px; font-style:italic; color:var(–emerald); margin-bottom:6px; text-align:center; }
+.modal-sub { font-size:12px; color:var(–text3); text-align:center; margin-bottom:24px; }
+.modal input { width:100%; padding:14px; background:var(–bg2); border:1.5px solid var(–border);
+border-radius:10px; color:var(–text); font-family:‘DM Mono’,monospace; font-size:15px; outline:none; margin-bottom:16px; }
+.modal input:focus { border-color:var(–teal); }
+.time-picker { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+.time-btn { background:none; border:none; color:var(–teal); font-size:32px; cursor:pointer; padding:8px 16px; }
+.time-display { text-align:center; }
+.time-num { font-family:‘DM Mono’,monospace; font-size:52px; font-weight:500; color:var(–emerald); line-height:1; }
+.time-unit { font-size:12px; color:var(–text3); letter-spacing:2px; margin-top:4px; }
 
 /* ── Menu ── */
-.menu-drawer {
-  position: fixed; left: 0; top: 0; bottom: 0; width: 280px; background: var(--bg2);
-  border-right: 1px solid var(--border); z-index: 200; transform: translateX(-100%);
-  transition: transform .35s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column;
-  padding-top: max(0px, env(safe-area-inset-top));
-}
-.menu-drawer.open { transform: translateX(0); }
-.menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 199; opacity: 0; pointer-events: none; transition: opacity .35s; }
-.menu-backdrop.show { opacity: 1; pointer-events: all; }
-.menu-header { padding: 24px 20px 16px; border-bottom: 1px solid var(--border); }
-.menu-player { display: flex; align-items: center; gap: 12px; }
-.menu-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; color: white; flex-shrink: 0; }
-.menu-name { font-size: 15px; color: var(--text); font-weight: 500; }
-.menu-best { font-size: 11px; color: var(--text3); margin-top: 2px; }
-.menu-items { flex: 1; overflow-y: auto; padding: 12px 0; }
-.menu-item { display: flex; align-items: center; gap: 14px; padding: 14px 20px; cursor: pointer; transition: background .2s; font-size: 14px; color: var(--text); border: none; background: none; width: 100%; text-align: left; font-family: inherit; }
-.menu-item:hover { background: rgba(99,102,241,.08); }
-.menu-item-icon { font-size: 18px; width: 24px; text-align: center; }
-.menu-divider { height: 1px; background: var(--border); margin: 8px 20px; }
+.menu-drawer { position:fixed; left:0; top:0; bottom:0; width:280px; background:var(–bg);
+border-right:2px solid var(–emerald); z-index:200; transform:translateX(-100%);
+transition:transform .35s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column;
+padding-top:max(0px,env(safe-area-inset-top)); }
+.menu-drawer.open { transform:translateX(0); }
+.menu-backdrop { position:fixed; inset:0; background:rgba(10,30,22,.55); z-index:199; opacity:0; pointer-events:none; transition:opacity .35s; }
+.menu-backdrop.show { opacity:1; pointer-events:all; }
+.menu-header { padding:24px 20px 16px; border-bottom:1px solid var(–border); background:var(–emerald); }
+.menu-player { display:flex; align-items:center; gap:12px; }
+.menu-avatar { width:44px; height:44px; border-radius:50%; background:rgba(212,166,74,.25); border:1.5px solid rgba(212,166,74,.5); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:600; color:#F6F3EA; flex-shrink:0; }
+.menu-name { font-size:15px; color:#F6F3EA; font-weight:500; }
+.menu-best { font-size:11px; color:rgba(246,243,234,.55); margin-top:2px; }
+.menu-items { flex:1; overflow-y:auto; padding:12px 0; }
+.menu-item { display:flex; align-items:center; gap:14px; padding:14px 20px; cursor:pointer; transition:background .2s; font-size:14px; color:var(–text); border:none; background:none; width:100%; text-align:left; font-family:inherit; }
+.menu-item:hover { background:rgba(15,94,74,.07); }
+.menu-item-icon { font-size:18px; width:24px; text-align:center; }
+.menu-divider { height:1px; background:var(–border); margin:8px 20px; }
 
 /* ── Quiz Screen ── */
-#quiz { background: var(--bg); }
-.quiz-stats { padding: 14px 16px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; border-bottom: 1px solid var(--border); }
-.progress-wrap { flex: 1; }
-.progress-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); letter-spacing: 1px; margin-bottom: 6px; }
-.progress-bar { height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 3px; transition: width .4s ease; }
-.timer-wrap { text-align: right; flex-shrink: 0; }
-.timer-label { font-size: 9px; letter-spacing: 2px; color: var(--text3); text-transform: uppercase; }
-.timer-val { font-family: 'DM Mono', monospace; font-size: 26px; font-weight: 500; transition: color .5s; line-height: 1.1; }
-.timer-val.green { color: var(--green); }
-.timer-val.yellow { color: var(--yellow); }
-.timer-val.red { color: var(--red); }
-.timer-val.free { color: var(--accent2); }
+#quiz { background:var(–bg); }
 
-/* Mic section */
-.mic-section { padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
-.mic-status { font-size: 12px; color: var(--text3); letter-spacing: 1px; transition: color .2s; }
-.mic-status.listening { color: var(--green); }
-.mic-live { font-size: 14px; color: var(--text); min-height: 20px; text-align: center; }
-.mic-btn {
-  width: 72px; height: 72px; border-radius: 50%; border: none; cursor: pointer;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  display: flex; align-items: center; justify-content: center; font-size: 26px;
-  box-shadow: 0 4px 20px rgba(99,102,241,.35); transition: transform .15s, box-shadow .15s;
-  position: relative; user-select: none; -webkit-user-select: none;
-}
-.mic-btn.listening {
-  background: linear-gradient(135deg, #059669, #10b981);
-  box-shadow: 0 4px 24px rgba(16,185,129,.5);
-  animation: mic-pulse 1s ease-in-out infinite;
-}
-@keyframes mic-pulse { 0%,100%{box-shadow:0 4px 24px rgba(16,185,129,.5)} 50%{box-shadow:0 4px 40px rgba(16,185,129,.8), 0 0 0 12px rgba(16,185,129,.1)} }
-.mic-hint { font-size: 10px; color: var(--text3); letter-spacing: 1px; }
+/* Top bar: stats */
+.quiz-topbar { padding:10px 16px; display:flex; align-items:center; gap:14px;
+flex-shrink:0; border-bottom:1px solid var(–border); background:var(–bg); }
+.progress-wrap { flex:1; }
+.progress-labels { display:flex; justify-content:space-between; font-size:10px; color:var(–text3); letter-spacing:1px; margin-bottom:5px; }
+.progress-bar { height:5px; background:var(–bg3); border-radius:3px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(–emerald),var(–teal)); border-radius:3px; transition:width .4s ease; }
+.timer-wrap { text-align:right; flex-shrink:0; min-width:72px; }
+.timer-label { font-size:9px; letter-spacing:2px; color:var(–text3); text-transform:uppercase; }
+.timer-val { font-family:‘DM Mono’,monospace; font-size:24px; font-weight:500; transition:color .5s; line-height:1.1; }
+.timer-val.green { color:var(–teal); }
+.timer-val.yellow { color:var(–gold); }
+.timer-val.red { color:var(–red); }
+.timer-val.free { color:var(–emerald); }
 
-/* Input row */
-.input-row { padding: 0 16px 12px; display: flex; gap: 8px; flex-shrink: 0; }
-.divider-row { display: flex; align-items: center; gap: 10px; padding: 0 16px 10px; flex-shrink: 0; }
-.divider-row::before, .divider-row::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.divider-row span { font-size: 10px; color: var(--text3); letter-spacing: 1px; white-space: nowrap; }
-.quiz-input {
-  flex: 1; padding: 13px 14px; background: var(--bg3); border: 1px solid var(--border2);
-  border-radius: 12px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 15px;
-  outline: none; transition: border-color .2s;
-}
-.quiz-input:focus { border-color: var(--accent); }
-.quiz-input.shake { animation: shake .5s ease; }
-@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
-.go-btn {
-  padding: 13px 18px; background: linear-gradient(135deg, var(--accent), var(--accent2));
-  border: none; border-radius: 12px; color: white; font-family: 'DM Mono', monospace;
-  font-size: 13px; font-weight: 500; cursor: pointer; letter-spacing: 1px; transition: transform .15s;
-}
-.go-btn:active { transform: scale(.95); }
+/* Input + mic bar */
+.quiz-inputbar { padding:10px 14px; display:flex; align-items:center; gap:8px;
+flex-shrink:0; background:var(–bg2); border-bottom:1px solid var(–border); }
+.quiz-input { flex:1; padding:11px 14px; background:var(–bg); border:1.5px solid var(–border);
+border-radius:10px; color:var(–text); font-family:‘DM Mono’,monospace; font-size:15px; outline:none; transition:border-color .2s; }
+.quiz-input:focus { border-color:var(–teal); }
+.quiz-input.shake { animation:shake .45s ease; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+.go-btn { padding:11px 16px; background:var(–emerald); border:none; border-radius:10px;
+color:white; font-family:‘DM Mono’,monospace; font-size:13px; font-weight:500; cursor:pointer; letter-spacing:1px; flex-shrink:0; }
+.go-btn:active { background:var(–emerald-dark); }
+.mic-btn-sm { width:44px; height:44px; border-radius:50%; border:1.5px solid var(–teal); cursor:pointer;
+background:white; display:flex; align-items:center; justify-content:center; font-size:18px;
+flex-shrink:0; transition:background .2s; user-select:none; -webkit-user-select:none; }
+.mic-btn-sm.listening { background:var(–teal); animation:mic-pulse-sm .9s ease-in-out infinite; }
+@keyframes mic-pulse-sm { 0%,100%{box-shadow:0 0 0 0 rgba(43,174,155,.4)} 50%{box-shadow:0 0 0 8px rgba(43,174,155,0)} }
+.mic-live-bar { font-size:11px; color:var(–emerald); min-height:16px; padding:0 16px 6px;
+text-align:center; flex-shrink:0; background:var(–bg2); font-style:italic; }
 
-/* Word grid */
-.word-grid { flex: 1; overflow-y: auto; padding: 12px 14px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; align-content: start; }
-.word-tile {
-  background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
-  padding: 10px 6px; text-align: center; font-size: 12px; font-family: 'Tajawal', sans-serif;
-  color: transparent; text-shadow: 0 0 8px rgba(160,160,200,.4); filter: blur(4px);
-  transition: all .35s ease; user-select: none; cursor: default; min-height: 44px;
-  display: flex; align-items: center; justify-content: center;
+/* ── Chart ── */
+.chart-wrap { flex:1; overflow:auto; padding:12px 10px 40px; background:var(–bg); }
+.chart-table { border-collapse:separate; border-spacing:5px; margin:0 auto; direction:rtl; }
+.chart-cell {
+width:86px; min-width:86px; height:64px;
+background:var(–bg2); border:1px solid var(–border); border-radius:9px;
+text-align:center; vertical-align:middle; padding:4px; position:relative;
+transition:all .35s ease; cursor:default; user-select:none;
 }
-.word-tile.guessed {
-  color: var(--accent2); text-shadow: none; filter: none;
-  background: rgba(99,102,241,.08); border-color: rgba(99,102,241,.35);
-  font-weight: 500;
+/* Number badge top-left (visually top-right in RTL) */
+.cell-num {
+position:absolute; top:4px; left:4px;
+font-size:8px; color:var(–gold); font-weight:600; letter-spacing:.5px; line-height:1;
+font-family:‘DM Mono’,monospace;
 }
-.word-tile.flash { animation: tile-pop .5s ease; }
-@keyframes tile-pop { 0%{transform:scale(.85)} 60%{transform:scale(1.1)} 100%{transform:scale(1)} }
+/* Blurred state — show Arabic blurred */
+.cell-arabic-blur {
+font-family:‘Tajawal’,sans-serif; font-size:15px; color:var(–text);
+filter:blur(5px); user-select:none; display:block; line-height:1.3;
+transition:filter .35s ease, color .35s ease;
+}
+/* Revealed state */
+.chart-cell.revealed {
+background:var(–emerald); border:1.5px solid rgba(212,166,74,.5);
+box-shadow:0 2px 8px rgba(15,94,74,.2);
+}
+.chart-cell.revealed .cell-num { color:rgba(212,166,74,.6); }
+.chart-cell.revealed .cell-arabic-blur { filter:none; color:transparent; display:none; }
+.cell-revealed-content { display:none; color:#F6F3EA; }
+.chart-cell.revealed .cell-revealed-content { display:block; }
+.cell-translit { font-size:10px; font-weight:500; letter-spacing:.3px; line-height:1.3; color:#F6F3EA; }
+.cell-arabic-shown { font-family:‘Tajawal’,sans-serif; font-size:16px; color:#F6F3EA; line-height:1.3; }
+.cell-meaning { font-size:9px; color:rgba(246,243,234,.7); line-height:1.3; font-style:italic; }
+/* Flash animation */
+.chart-cell.flash { animation:cell-pop .5s ease; }
+@keyframes cell-pop { 0%{transform:scale(.88)} 55%{transform:scale(1.08);background:#2BAE9B;border-color:rgba(212,166,74,.8)} 100%{transform:scale(1)} }
+/* Empty cell */
+.chart-cell.empty { background:transparent; border:1px dashed var(–border); opacity:.4; }
 
 /* ── End overlay ── */
-.end-icon { font-size: 56px; text-align: center; margin-bottom: 12px; }
-.end-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; color: var(--text); text-align: center; margin-bottom: 8px; }
-.end-score { text-align: center; margin-bottom: 28px; }
-.end-score-num { font-family: 'DM Mono', monospace; font-size: 28px; color: var(--accent2); }
-.end-score-text { font-size: 13px; color: var(--text3); }
-.end-btns { display: flex; flex-direction: column; gap: 10px; }
-.btn-outline {
-  width: 100%; padding: 14px; border: 1px solid var(--border2); border-radius: 12px;
-  background: var(--bg3); color: var(--accent2); font-family: 'DM Mono', monospace;
-  font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.btn-ghost {
-  width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px;
-  background: none; color: var(--text3); font-family: 'DM Mono', monospace;
-  font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.free-badge {
-  display: inline-block; padding: 2px 8px; background: rgba(167,139,250,.15);
-  border: 1px solid rgba(167,139,250,.3); border-radius: 20px; font-size: 10px;
-  color: var(--accent2); letter-spacing: 1px; margin-left: 8px; vertical-align: middle;
-}
+.end-icon { font-size:52px; text-align:center; margin-bottom:12px; }
+.end-title { font-family:‘Cormorant Garamond’,serif; font-size:28px; font-style:italic; color:var(–emerald); text-align:center; margin-bottom:8px; }
+.end-score { text-align:center; margin-bottom:28px; }
+.end-score-num { font-family:‘DM Mono’,monospace; font-size:28px; color:var(–gold); }
+.end-score-text { font-size:13px; color:var(–text3); }
+.end-btns { display:flex; flex-direction:column; gap:10px; }
+.btn-outline { width:100%; padding:14px; border:1.5px solid var(–teal); border-radius:12px;
+background:rgba(43,174,155,.07); color:var(–teal); font-family:‘DM Mono’,monospace;
+font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-ghost { width:100%; padding:14px; border:1px solid var(–border); border-radius:12px;
+background:none; color:var(–text3); font-family:‘DM Mono’,monospace;
+font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+.free-badge { display:inline-block; padding:2px 8px; background:rgba(212,166,74,.12);
+border:1px solid rgba(212,166,74,.3); border-radius:20px; font-size:10px;
+color:var(–gold); letter-spacing:1px; margin-left:8px; vertical-align:middle; }
 
-/* ── Learn Screen ── */
-#learn { background: var(--bg); }
-.learn-search-wrap { padding: 12px 16px; flex-shrink: 0; border-bottom: 1px solid var(--border); }
-.learn-search {
-  display: flex; align-items: center; gap: 10px; background: var(--bg3);
-  border: 1px solid var(--border2); border-radius: 12px; padding: 10px 14px;
-}
-.learn-search input { flex: 1; background: none; border: none; color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; outline: none; }
-.learn-search input::placeholder { color: var(--text3); }
-.learn-search-icon { color: var(--text3); font-size: 16px; }
-.learn-list { flex: 1; overflow-y: auto; padding: 10px 14px 40px; display: flex; flex-direction: column; gap: 8px; }
-.learn-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color .2s; }
-.learn-item.expanded { border-color: rgba(99,102,241,.4); }
-.learn-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; }
-.learn-num {
-  width: 32px; height: 32px; border-radius: 50%; background: var(--bg3);
-  display: flex; align-items: center; justify-content: center; font-size: 12px;
-  color: var(--text3); flex-shrink: 0; transition: background .2s, color .2s;
-}
-.learn-item.expanded .learn-num { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; }
-.learn-info { flex: 1; }
-.learn-translit { font-size: 14px; font-weight: 500; color: var(--text); }
-.learn-meaning { font-size: 11px; color: var(--text3); margin-top: 2px; }
-.learn-arabic { font-family: 'Tajawal', sans-serif; font-size: 20px; color: var(--text3); transition: color .2s; margin-right: 4px; }
-.learn-item.expanded .learn-arabic { color: var(--accent2); }
-.learn-chevron { font-size: 11px; color: var(--text3); transition: transform .3s; }
-.learn-item.expanded .learn-chevron { transform: rotate(180deg); }
-.learn-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
-.learn-item.expanded .learn-body { display: block; }
-.learn-arabic-large { font-family: 'Tajawal', sans-serif; font-size: 38px; color: var(--accent2); text-align: center; padding: 16px 0 10px; }
-.learn-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+/* ── Learn ── */
+#learn { background:var(–bg); }
+.learn-search-wrap { padding:12px 16px; flex-shrink:0; border-bottom:1px solid var(–border); }
+.learn-search { display:flex; align-items:center; gap:10px; background:var(–bg2);
+border:1.5px solid var(–border); border-radius:12px; padding:10px 14px; }
+.learn-search input { flex:1; background:none; border:none; color:var(–text); font-family:‘DM Mono’,monospace; font-size:14px; outline:none; }
+.learn-search input::placeholder { color:var(–text3); }
+.learn-list { flex:1; overflow-y:auto; padding:10px 14px 40px; display:flex; flex-direction:column; gap:8px; }
+.learn-item { background:var(–bg2); border:1px solid var(–border); border-radius:14px; overflow:hidden; transition:border-color .2s; }
+.learn-item.expanded { border-color:var(–emerald); border-width:1.5px; }
+.learn-header { display:flex; align-items:center; gap:12px; padding:14px 16px; cursor:pointer; }
+.learn-num { width:32px; height:32px; border-radius:50%; background:var(–bg3);
+display:flex; align-items:center; justify-content:center; font-size:12px;
+color:var(–text3); flex-shrink:0; transition:background .2s,color .2s; }
+.learn-item.expanded .learn-num { background:var(–emerald); color:white; }
+.learn-info { flex:1; }
+.learn-translit { font-size:14px; font-weight:500; color:var(–text); }
+.learn-meaning { font-size:11px; color:var(–text3); margin-top:2px; }
+.learn-arabic { font-family:‘Tajawal’,sans-serif; font-size:20px; color:var(–text3); transition:color .2s; margin-right:4px; }
+.learn-item.expanded .learn-arabic { color:var(–gold); }
+.learn-chevron { font-size:11px; color:var(–text3); transition:transform .3s; }
+.learn-item.expanded .learn-chevron { transform:rotate(180deg); }
+.learn-body { display:none; padding:0 16px 16px; border-top:1px solid var(–border); }
+.learn-item.expanded .learn-body { display:block; }
+.learn-arabic-large { font-family:‘Tajawal’,sans-serif; font-size:38px; color:var(–gold); text-align:center; padding:16px 0 10px; }
+.learn-desc { font-size:13px; color:var(–text2); line-height:1.7; }
 
 /* ── Pause overlay ── */
-.pause-overlay {
-  position: fixed; inset: 0; background: rgba(4,4,12,.95); z-index: 50;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-  opacity: 0; pointer-events: none; transition: opacity .3s;
-}
-.pause-overlay.show { opacity: 1; pointer-events: all; }
-.pause-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-style: italic; color: var(--text); }
-.pause-score { font-size: 13px; color: var(--text3); }
+.pause-overlay { position:fixed; inset:0; background:rgba(8,54,40,.96); z-index:50;
+display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;
+opacity:0; pointer-events:none; transition:opacity .3s; }
+.pause-overlay.show { opacity:1; pointer-events:all; }
+.pause-title { font-family:‘Cormorant Garamond’,serif; font-size:32px; font-style:italic; color:#F6F3EA; }
+.pause-score { font-size:13px; color:rgba(246,243,234,.5); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width:4px; height:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:rgba(15,94,74,.25); border-radius:2px; }
 </style>
+
 </head>
 <body>
 
 <!-- SPLASH -->
+
 <div class="screen" id="splash">
   <div class="splash-orb">☪</div>
   <div class="splash-title">Asma-ul-Husna</div>
@@ -339,7 +294,8 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
   <div class="splash-tap">Tap anywhere to begin</div>
 </div>
 
-<!-- MENU DRAWER -->
+<!-- MENU -->
+
 <div class="menu-backdrop" id="menuBackdrop" onclick="closeMenu()"></div>
 <div class="menu-drawer" id="menuDrawer">
   <div class="menu-header">
@@ -360,6 +316,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 </div>
 
 <!-- DASHBOARD -->
+
 <div class="screen hidden" id="dashboard">
   <div class="nav">
     <button class="nav-btn hamburger" onclick="openMenu()">
@@ -407,24 +364,35 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
         <div class="score-sub">out of 99</div>
       </div>
     </div>
-    <!-- Buttons -->
+    <!-- Display preference -->
+    <div class="pref-section">
+      <div class="pref-title">Revealed Cell Shows</div>
+      <div class="pref-options">
+        <button class="pref-btn active" id="pref-translit" onclick="setDisplayPref('translit')">Transliteration</button>
+        <button class="pref-btn" id="pref-arabic" onclick="setDisplayPref('arabic')">Arabic</button>
+        <button class="pref-btn" id="pref-both" onclick="setDisplayPref('both')">Both</button>
+        <button class="pref-btn" id="pref-meaning" onclick="setDisplayPref('meaning')">Meaning</button>
+      </div>
+    </div>
+    <!-- Action buttons -->
     <button class="btn-primary" onclick="showTimePopup()">▶ &nbsp;Start Quiz</button>
     <button class="btn-secondary" onclick="showScreen('learn')">📖 &nbsp;Learn the Names</button>
   </div>
 </div>
 
 <!-- QUIZ -->
+
 <div class="screen hidden" id="quiz">
   <div class="nav">
     <button class="nav-btn" onclick="saveScore();showScreen('dashboard')" style="gap:4px">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       Home
     </button>
     <div class="nav-title">Asma-ul-Husna</div>
     <button class="nav-btn" id="pauseBtn" onclick="togglePause()">⏸</button>
   </div>
-  <!-- Stats -->
-  <div class="quiz-stats">
+  <!-- Stats bar -->
+  <div class="quiz-topbar">
     <div class="progress-wrap">
       <div class="progress-labels">
         <span>PROGRESS</span>
@@ -437,29 +405,25 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
       <div class="timer-val green" id="timerVal">05:00</div>
     </div>
   </div>
-  <!-- Mic -->
-  <div class="mic-section">
-    <div class="mic-status" id="micStatus">Hold mic to speak</div>
-    <div class="mic-live" id="micLive"></div>
-    <button class="mic-btn" id="micBtn">🎙</button>
-    <div class="mic-hint">HOLD TO SPEAK · RELEASE TO SUBMIT</div>
-  </div>
-  <!-- Divider -->
-  <div class="divider-row"><span>or type</span></div>
-  <!-- Input -->
-  <div class="input-row">
-    <input class="quiz-input" id="quizInput" placeholder="Type a name…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <!-- Input + mic bar -->
+  <div class="quiz-inputbar">
+    <button class="mic-btn-sm" id="micBtn">🎙</button>
+    <input class="quiz-input" id="quizInput" placeholder="Type or speak a name…" autocomplete="off" autocorrect="off" spellcheck="false">
     <button class="go-btn" onclick="submitGuess()">GO</button>
   </div>
-  <!-- Grid -->
-  <div class="word-grid" id="wordGrid"></div>
+  <div class="mic-live-bar" id="micLive"></div>
+  <!-- Chart -->
+  <div class="chart-wrap">
+    <table class="chart-table" id="chartTable"></table>
+  </div>
 </div>
 
 <!-- LEARN -->
+
 <div class="screen hidden" id="learn">
   <div class="nav">
     <button class="nav-btn" onclick="showScreen('dashboard')" style="gap:4px">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       Back
     </button>
     <div class="nav-title">Learn</div>
@@ -467,14 +431,15 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
   </div>
   <div class="learn-search-wrap">
     <div class="learn-search">
-      <span class="learn-search-icon">🔍</span>
+      <span style="color:var(--text3)">🔍</span>
       <input id="learnSearch" placeholder="Search names or meanings…" oninput="filterLearn()" autocomplete="off">
     </div>
   </div>
   <div class="learn-list" id="learnList"></div>
 </div>
 
-<!-- PAUSE OVERLAY -->
+<!-- PAUSE -->
+
 <div class="pause-overlay" id="pauseOverlay">
   <div style="font-size:48px">⏸</div>
   <div class="pause-title">Paused</div>
@@ -484,6 +449,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 </div>
 
 <!-- NAME EDITOR -->
+
 <div class="overlay" id="nameOverlay">
   <div class="modal">
     <div class="modal-title">Your Name</div>
@@ -494,6 +460,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 </div>
 
 <!-- TIME POPUP -->
+
 <div class="overlay" id="timeOverlay">
   <div class="modal">
     <div class="modal-title">Set Time Limit</div>
@@ -511,6 +478,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 </div>
 
 <!-- END OVERLAY -->
+
 <div class="overlay" id="endOverlay">
   <div class="modal">
     <div class="end-icon" id="endIcon">⏱️</div>
@@ -633,6 +601,9 @@ const NAMES_DATA = [
   {display:"As-Saboor",arabic:"الصَّبُورُ",meaning:"The Patient One",desc:"The One who does not hasten punishment upon those who disobey Him but gives them time to repent.",variants:["as-saboor","saboor","sabur"]}
 ];
 
+const COLS = 13;
+const ROWS = 8; // 8×13 = 104, last 5 are empty
+
 // ─────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────
@@ -644,9 +615,10 @@ let state = {
   finished: false,
   freePlay: false,
   paused: false,
-  scoreSaved: false,
-  timerInterval: null
+  scoreSaved: false
 };
+
+let displayPref = 'translit'; // translit | arabic | both | meaning
 
 // ─────────────────────────────────────────────
 // STORAGE
@@ -657,24 +629,56 @@ const S = {
 };
 
 function loadStorage() {
-  const pn = S.get('playerName') || '';
-  const best = S.get('bestScore') || 0;
-  const last = S.get('lastScore') || 0;
-  const games = S.get('totalGames') || 0;
+  const pn   = S.get('playerName') || '';
+  const best = S.get('bestScore')  || 0;
+  const last = S.get('lastScore')  || 0;
+  const games= S.get('totalGames') || 0;
   const guessed = S.get('guessedNames') || {};
-  const weak = S.get('weakNames') || {};
+  const weak    = S.get('weakNames')    || {};
   const easy = Object.keys(guessed).filter(k => guessed[k] >= 3 && !weak[k]).length;
 
-  document.getElementById('dashAvatar').textContent = pn ? pn[0].toUpperCase() : '?';
-  document.getElementById('dashName').textContent = pn || 'Set your name';
-  document.getElementById('dashName').style.color = pn ? 'var(--text)' : 'var(--text3)';
-  document.getElementById('dashGames').textContent = games + ' GAMES PLAYED';
-  document.getElementById('bestScore').textContent = best;
-  document.getElementById('lastScore').textContent = last;
-  document.getElementById('easyCount').textContent = easy;
-  document.getElementById('menuAvatar').textContent = pn ? pn[0].toUpperCase() : '?';
-  document.getElementById('menuName').textContent = pn || 'Player';
-  document.getElementById('menuBest').textContent = 'Best: ' + best + ' / 99';
+  displayPref = S.get('displayPref') || 'translit';
+
+  document.getElementById('dashAvatar').textContent  = pn ? pn[0].toUpperCase() : '?';
+  document.getElementById('dashName').textContent    = pn || 'Set your name';
+  document.getElementById('dashName').style.color    = pn ? 'var(--text)' : 'var(--text3)';
+  document.getElementById('dashGames').textContent   = games + ' GAMES PLAYED';
+  document.getElementById('bestScore').textContent   = best;
+  document.getElementById('lastScore').textContent   = last;
+  document.getElementById('easyCount').textContent   = easy;
+  document.getElementById('menuAvatar').textContent  = pn ? pn[0].toUpperCase() : '?';
+  document.getElementById('menuName').textContent    = pn || 'Player';
+  document.getElementById('menuBest').textContent    = 'Best: ' + best + ' / 99';
+
+  // Sync pref buttons
+  ['translit','arabic','both','meaning'].forEach(p => {
+    const btn = document.getElementById('pref-' + p);
+    if (btn) btn.classList.toggle('active', p === displayPref);
+  });
+}
+
+// ─────────────────────────────────────────────
+// DISPLAY PREFERENCE
+// ─────────────────────────────────────────────
+function setDisplayPref(pref) {
+  displayPref = pref;
+  S.set('displayPref', pref);
+  ['translit','arabic','both','meaning'].forEach(p => {
+    document.getElementById('pref-' + p).classList.toggle('active', p === pref);
+  });
+}
+
+function getCellContent(n) {
+  switch(displayPref) {
+    case 'arabic':
+      return `<span class="cell-arabic-shown">${n.arabic}</span>`;
+    case 'both':
+      return `<span class="cell-arabic-shown" style="font-size:13px">${n.arabic}</span><span class="cell-translit" style="font-size:9px;opacity:.8">${n.display}</span>`;
+    case 'meaning':
+      return `<span class="cell-meaning" style="font-size:10px;color:#F6F3EA">${n.meaning}</span>`;
+    default: // translit
+      return `<span class="cell-translit">${n.display}</span>`;
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -698,14 +702,8 @@ document.getElementById('splash').addEventListener('click', () => {
 // ─────────────────────────────────────────────
 // MENU
 // ─────────────────────────────────────────────
-function openMenu() {
-  document.getElementById('menuDrawer').classList.add('open');
-  document.getElementById('menuBackdrop').classList.add('show');
-}
-function closeMenu() {
-  document.getElementById('menuDrawer').classList.remove('open');
-  document.getElementById('menuBackdrop').classList.remove('show');
-}
+function openMenu()  { document.getElementById('menuDrawer').classList.add('open'); document.getElementById('menuBackdrop').classList.add('show'); }
+function closeMenu() { document.getElementById('menuDrawer').classList.remove('open'); document.getElementById('menuBackdrop').classList.remove('show'); }
 
 // ─────────────────────────────────────────────
 // NAME EDITOR
@@ -742,37 +740,70 @@ document.getElementById('timeOverlay').addEventListener('click', e => {
 });
 
 // ─────────────────────────────────────────────
-// QUIZ
+// CHART BUILD — RTL, 8 rows × 13 cols
 // ─────────────────────────────────────────────
-function buildGrid() {
-  const grid = document.getElementById('wordGrid');
-  grid.innerHTML = '';
-  NAMES_DATA.forEach((n, i) => {
-    const tile = document.createElement('div');
-    tile.className = 'word-tile';
-    tile.textContent = n.display;
-    tile.id = 'tile-' + i;
-    grid.appendChild(tile);
-  });
+function buildChart() {
+  const table = document.getElementById('chartTable');
+  table.innerHTML = '';
+  let nameIdx = 0;
+
+  for (let row = 0; row < ROWS; row++) {
+    const tr = document.createElement('tr');
+    for (let col = 0; col < COLS; col++) {
+      const td = document.createElement('td');
+      td.className = 'chart-cell';
+      if (nameIdx < NAMES_DATA.length) {
+        const n = NAMES_DATA[nameIdx];
+        td.id = 'cell-' + nameIdx;
+        td.dataset.idx = nameIdx;
+        // Number badge
+        td.innerHTML = `
+          <span class="cell-num">${nameIdx + 1}</span>
+          <span class="cell-arabic-blur">${n.arabic}</span>
+          <div class="cell-revealed-content">${getCellContent(n)}</div>`;
+        nameIdx++;
+      } else {
+        td.classList.add('empty');
+      }
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
 }
 
+function revealCell(idx) {
+  const td = document.getElementById('cell-' + idx);
+  if (!td) return;
+  const n = NAMES_DATA[idx];
+  // Update revealed content in case pref changed
+  td.querySelector('.cell-revealed-content').innerHTML = getCellContent(n);
+  td.classList.add('revealed', 'flash');
+  td.addEventListener('animationend', () => td.classList.remove('flash'), { once: true });
+  // Scroll cell into view
+  td.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+}
+
+// ─────────────────────────────────────────────
+// QUIZ
+// ─────────────────────────────────────────────
 function startQuiz() {
   document.getElementById('timeOverlay').classList.remove('show');
-  state.guessed = new Set();
-  state.chosenTime = chosenMinutes * 60;
-  state.timeLeft = state.chosenTime;
-  state.started = false;
-  state.finished = false;
-  state.freePlay = false;
-  state.paused = false;
-  state.scoreSaved = false;
+  state.guessed     = new Set();
+  state.chosenTime  = chosenMinutes * 60;
+  state.timeLeft    = state.chosenTime;
+  state.started     = false;
+  state.finished    = false;
+  state.freePlay    = false;
+  state.paused      = false;
+  state.scoreSaved  = false;
   clearInterval(state.timerInterval);
-  buildGrid();
+  buildChart();
   updateProgress();
   updateTimer();
   showScreen('quiz');
   document.getElementById('quizInput').value = '';
-  document.getElementById('quizInput').focus();
+  document.getElementById('micLive').textContent = '';
+  setTimeout(() => document.getElementById('quizInput').focus(), 300);
 }
 
 function startIfNeeded() {
@@ -792,11 +823,7 @@ function startIfNeeded() {
 
 function updateTimer() {
   const el = document.getElementById('timerVal');
-  if (state.freePlay) {
-    el.textContent = '∞';
-    el.className = 'timer-val free';
-    return;
-  }
+  if (state.freePlay) { el.textContent = '∞'; el.className = 'timer-val free'; return; }
   const m = Math.floor(state.timeLeft / 60).toString().padStart(2,'0');
   const s = (state.timeLeft % 60).toString().padStart(2,'0');
   el.textContent = m + ':' + s;
@@ -811,35 +838,32 @@ function updateProgress() {
 }
 
 function isCorrect(input, nameEntry) {
-  const t = input.toLowerCase().trim();
-  return nameEntry.variants.includes(t);
+  return nameEntry.variants.includes(input.toLowerCase().trim());
 }
 
 function submitGuess() {
   const input = document.getElementById('quizInput');
-  const val = input.value.trim();
+  const val   = input.value.trim();
   if (!val) return;
   startIfNeeded();
-  const match = NAMES_DATA.find((n, i) => !state.guessed.has(i) && isCorrect(val, n));
-  if (match) {
-    const idx = NAMES_DATA.indexOf(match);
+
+  const idx = NAMES_DATA.findIndex((n, i) => !state.guessed.has(i) && isCorrect(val, n));
+  if (idx !== -1) {
     state.guessed.add(idx);
     input.value = '';
+    document.getElementById('micLive').textContent = '';
     updateProgress();
-    trackGuessed(match.display);
-    const tile = document.getElementById('tile-' + idx);
-    tile.classList.add('guessed','flash');
-    tile.addEventListener('animationend', () => tile.classList.remove('flash'), {once:true});
-    tile.scrollIntoView({behavior:'smooth', block:'center'});
+    trackGuessed(NAMES_DATA[idx].display);
+    revealCell(idx);
     if (state.guessed.size === 99) {
       clearInterval(state.timerInterval);
       state.finished = true;
-      setTimeout(showEndOverlay, 500);
+      setTimeout(showEndOverlay, 600);
     }
   } else {
     input.value = '';
     input.classList.add('shake');
-    input.addEventListener('animationend', () => input.classList.remove('shake'), {once:true});
+    input.addEventListener('animationend', () => input.classList.remove('shake'), { once: true });
   }
 }
 
@@ -854,7 +878,7 @@ document.getElementById('quizInput').addEventListener('keydown', e => {
 function togglePause() {
   state.paused = !state.paused;
   const overlay = document.getElementById('pauseOverlay');
-  const btn = document.getElementById('pauseBtn');
+  const btn     = document.getElementById('pauseBtn');
   if (state.paused) {
     overlay.classList.add('show');
     btn.textContent = '▶';
@@ -866,13 +890,13 @@ function togglePause() {
 }
 
 // ─────────────────────────────────────────────
-// END OVERLAY
+// END
 // ─────────────────────────────────────────────
 function showEndOverlay() {
   const complete = state.guessed.size === 99;
-  document.getElementById('endIcon').textContent = complete ? '🏆' : '⏱️';
+  document.getElementById('endIcon').textContent  = complete ? '🏆' : '⏱️';
   document.getElementById('endTitle').textContent = complete ? 'Perfect!' : "Time's Up!";
-  document.getElementById('endNum').textContent = state.guessed.size;
+  document.getElementById('endNum').textContent   = state.guessed.size;
   document.getElementById('endOverlay').classList.add('show');
 }
 
@@ -884,9 +908,9 @@ function playAgain() {
 
 function enterFreePlay() {
   clearInterval(state.timerInterval);
-  state.freePlay = true;
-  state.finished = false;
-  state.paused = false;
+  state.freePlay  = true;
+  state.finished  = false;
+  state.paused    = false;
   document.getElementById('endOverlay').classList.remove('show');
   updateTimer();
   document.getElementById('quizInput').focus();
@@ -895,8 +919,8 @@ function enterFreePlay() {
 function saveScore() {
   if (state.scoreSaved || state.freePlay) return;
   const score = state.guessed.size;
-  const best = S.get('bestScore') || 0;
-  S.set('lastScore', score);
+  const best  = S.get('bestScore') || 0;
+  S.set('lastScore',  score);
   if (score > best) S.set('bestScore', score);
   S.set('totalGames', (S.get('totalGames') || 0) + 1);
   trackMissed();
@@ -911,10 +935,9 @@ function trackGuessed(name) {
   d[name] = (d[name] || 0) + 1;
   S.set('guessedNames', d);
 }
-
 function trackMissed() {
   const guessed = S.get('guessedNames') || {};
-  const missed = S.get('missedNames') || {};
+  const missed  = S.get('missedNames')  || {};
   NAMES_DATA.forEach((n, i) => {
     if (!state.guessed.has(i) && !guessed[n.display]) {
       missed[n.display] = (missed[n.display] || 0) + 1;
@@ -927,13 +950,13 @@ function trackMissed() {
 // LEARN
 // ─────────────────────────────────────────────
 let expandedLearnIdx = null;
-
 function buildLearn(filter = '') {
-  const list = document.getElementById('learnList');
+  const list  = document.getElementById('learnList');
   list.innerHTML = '';
   const lower = filter.toLowerCase();
   NAMES_DATA.forEach((n, i) => {
-    if (filter && !n.display.toLowerCase().includes(lower) && !n.meaning.toLowerCase().includes(lower) && !n.arabic.includes(filter)) return;
+    if (filter && !n.display.toLowerCase().includes(lower) &&
+        !n.meaning.toLowerCase().includes(lower) && !n.arabic.includes(filter)) return;
     const item = document.createElement('div');
     item.className = 'learn-item' + (expandedLearnIdx === i ? ' expanded' : '');
     item.innerHTML = `
@@ -953,22 +976,11 @@ function buildLearn(filter = '') {
     list.appendChild(item);
   });
 }
-
 function toggleLearn(i) {
   expandedLearnIdx = expandedLearnIdx === i ? null : i;
   buildLearn(document.getElementById('learnSearch').value);
-  if (expandedLearnIdx !== null) {
-    setTimeout(() => {
-      const items = document.querySelectorAll('.learn-item');
-      const visible = Array.from(items).find(el => el.querySelector('.learn-header').getAttribute('onclick') === `toggleLearn(${i})`);
-      if (visible) visible.scrollIntoView({behavior:'smooth', block:'nearest'});
-    }, 50);
-  }
 }
-
-function filterLearn() {
-  buildLearn(document.getElementById('learnSearch').value);
-}
+function filterLearn() { buildLearn(document.getElementById('learnSearch').value); }
 
 // ─────────────────────────────────────────────
 // VOICE
@@ -977,68 +989,58 @@ let recognition = null;
 let isListening = false;
 
 function setupVoice() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
-    document.getElementById('micStatus').textContent = 'Voice not supported in this browser';
-    document.getElementById('micBtn').style.opacity = '.4';
-    document.getElementById('micBtn').style.pointerEvents = 'none';
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    const btn = document.getElementById('micBtn');
+    btn.style.opacity = '.35';
+    btn.style.pointerEvents = 'none';
     return;
   }
-  recognition = new SpeechRecognition();
+  recognition = new SR();
   recognition.lang = 'en-US';
   recognition.continuous = false;
   recognition.interimResults = true;
 
   recognition.onresult = e => {
-    const transcript = Array.from(e.results).map(r => r[0].transcript).join('');
-    document.getElementById('micLive').textContent = transcript;
+    const t = Array.from(e.results).map(r => r[0].transcript).join('');
+    document.getElementById('micLive').textContent = t;
     if (e.results[e.results.length-1].isFinal) {
-      document.getElementById('quizInput').value = transcript;
+      document.getElementById('quizInput').value = t;
       document.getElementById('micLive').textContent = '';
       submitGuess();
     }
   };
-
   recognition.onend = () => {
     isListening = false;
     document.getElementById('micBtn').classList.remove('listening');
-    document.getElementById('micStatus').textContent = 'Hold mic to speak';
-    document.getElementById('micStatus').classList.remove('listening');
   };
-
   recognition.onerror = () => {
     isListening = false;
     document.getElementById('micBtn').classList.remove('listening');
-    document.getElementById('micStatus').textContent = 'Hold mic to speak';
-    document.getElementById('micStatus').classList.remove('listening');
   };
 }
 
 const micBtn = document.getElementById('micBtn');
-micBtn.addEventListener('mousedown', startVoice);
-micBtn.addEventListener('touchstart', e => { e.preventDefault(); startVoice(); }, {passive:false});
-micBtn.addEventListener('mouseup', stopVoice);
+micBtn.addEventListener('mousedown',  startVoice);
+micBtn.addEventListener('touchstart', e => { e.preventDefault(); startVoice(); }, { passive: false });
+micBtn.addEventListener('mouseup',    stopVoice);
 micBtn.addEventListener('mouseleave', stopVoice);
-micBtn.addEventListener('touchend', stopVoice);
+micBtn.addEventListener('touchend',   stopVoice);
 
 function startVoice() {
   if (!recognition || isListening) return;
   startIfNeeded();
   isListening = true;
   micBtn.classList.add('listening');
-  micBtn.textContent = '🎙';
-  document.getElementById('micStatus').textContent = 'Listening…';
-  document.getElementById('micStatus').classList.add('listening');
   try { recognition.start(); } catch(e) {}
 }
-
 function stopVoice() {
   if (!recognition || !isListening) return;
   try { recognition.stop(); } catch(e) {}
 }
 
 // ─────────────────────────────────────────────
-// PWA MANIFEST (injected)
+// PWA MANIFEST
 // ─────────────────────────────────────────────
 const manifest = {
   name: "99 Names · Asma-ul-Husna Quiz",
@@ -1046,14 +1048,14 @@ const manifest = {
   description: "How many names of Allah do you know?",
   start_url: "/",
   display: "standalone",
-  background_color: "#080810",
-  theme_color: "#080810",
-  icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%236366f1'/><text y='.9em' font-size='60' x='50%' dominant-baseline='middle' text-anchor='middle'>☪</text></svg>", sizes: "any", type: "image/svg+xml" }]
+  background_color: "#0F5E4A",
+  theme_color: "#0F5E4A",
+  icons: [{ src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230F5E4A'/><text y='.9em' font-size='60' x='50%' dominant-baseline='middle' text-anchor='middle'>☪</text></svg>", sizes: "any", type: "image/svg+xml" }]
 };
-const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
-const link = document.createElement('link');
-link.rel = 'manifest'; link.href = URL.createObjectURL(blob);
-document.head.appendChild(link);
+const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+const mlink = document.createElement('link');
+mlink.rel = 'manifest'; mlink.href = URL.createObjectURL(blob);
+document.head.appendChild(mlink);
 
 // ─────────────────────────────────────────────
 // INIT
@@ -1061,11 +1063,6 @@ document.head.appendChild(link);
 setupVoice();
 loadStorage();
 </script>
+
 </body>
 </html>
-```
-
-Now let me copy it to outputs:
-<function_calls>
-<invoke name="bash_tool">
-<parameter name="command">cp /home/claude/99names/index.html /
