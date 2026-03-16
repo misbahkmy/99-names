@@ -15,7 +15,6 @@
 <style>
 :root {
   --emerald:      #0F5E4A;
-  --emerald-dark: #0a4235;
   --emerald-deep: #083628;
   --teal:         #2BAE9B;
   --gold:         #D4A64A;
@@ -33,6 +32,7 @@
 html,body { height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:'DM Mono',monospace; }
 
 /* ── Screens ── */
+  --emerald-dark: #0a4235;
 .screen { position:fixed; inset:0; display:flex; flex-direction:column; overflow:hidden; transition:opacity .4s,transform .4s; }
 .screen.hidden { opacity:0; pointer-events:none; transform:translateY(16px); }
 
@@ -151,8 +151,19 @@ padding-top:max(0px,env(safe-area-inset-top)); }
 #quiz { background:var(–bg); }
 
 /* Top bar: stats */
-.quiz-topbar { padding:10px 16px; display:flex; align-items:center; gap:14px;
-flex-shrink:0; border-bottom:1px solid var(–border); background:var(–bg); }
+.quiz-inputbar { padding:10px 14px; display:flex; align-items:center; gap:8px;
+  flex-shrink:0; background:var(--bg2); border-top:1px solid var(--border); }
+
+/* On mobile — fix input to bottom of screen */
+@media (max-width: 767px) {
+  .quiz-right {
+    position:fixed; bottom:0; left:0; right:0;
+    background:var(--bg2); border-top:1px solid var(--border);
+    padding:8px 12px 12px; z-index:20;
+  }
+  .chart-wrap { padding-bottom:80px; }
+}
+; background:var(–bg); }
 .progress-wrap { flex:1; }
 .progress-labels { display:flex; justify-content:space-between; font-size:10px; color:var(–text3); letter-spacing:1px; margin-bottom:5px; }
 .progress-bar { height:5px; background:var(–bg3); border-radius:3px; overflow:hidden; }
@@ -186,9 +197,9 @@ text-align:center; flex-shrink:0; background:var(–bg2); font-style:italic; }
 
 /* ── Chart ── */
 .chart-wrap { flex:1; overflow:auto; padding:12px 10px 40px; background:var(–bg); }
-.chart-table { border-collapse:separate; border-spacing:5px; margin:0 auto; direction:rtl; }
+.chart-table { border-collapse:separate; border-spacing:4px; margin:0 auto; direction:rtl; width:100%; table-layout:fixed; }
 .chart-cell {
-width:86px; min-width:86px; height:64px;
+  width:calc((100vw - 40px) / 13); min-width:0; height:44px;
 background:var(–bg2); border:1px solid var(–border); border-radius:9px;
 text-align:center; vertical-align:middle; padding:4px; position:relative;
 transition:all .35s ease; cursor:default; user-select:none;
@@ -274,6 +285,38 @@ opacity:0; pointer-events:none; transition:opacity .3s; }
 .pause-overlay.show { opacity:1; pointer-events:all; }
 .pause-title { font-family:‘Cormorant Garamond’,serif; font-size:32px; font-style:italic; color:#F6F3EA; }
 .pause-score { font-size:13px; color:rgba(246,243,234,.5); }
+
+  /* ── Responsive layout ── */
+
+/* Mobile default — chart shrinks to fit 13 cols */
+.chart-wrap { flex:1; overflow:auto; padding:8px 6px 20px; background:var(--bg); }
+
+/* iPad — split view */
+@media (min-width: 768px) {
+  #quiz { flex-direction:row; flex-wrap:wrap; }
+  #quiz .nav { width:100%; }
+  #quiz .quiz-topbar { width:100%; }
+  .quiz-left {
+    flex:1; display:flex; flex-direction:column;
+    overflow:hidden; border-right:1px solid var(--border);
+  }
+  .quiz-right {
+    width:320px; display:flex; flex-direction:column;
+    padding:16px; gap:12px; overflow-y:auto; background:var(--bg2);
+  }
+  .chart-table { table-layout:fixed; width:100%; }
+  .chart-cell { width:auto; height:60px; }
+  .chart-wrap { overflow:auto; flex:1; padding:12px; }
+  /* Results and Learn — full size cells, horizontal scroll */
+  .chart-results .chart-cell { width:88px; min-width:88px; height:60px; }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .quiz-right { width:360px; }
+  .chart-cell { height:64px; }
+  .chart-results .chart-cell { width:96px; min-width:96px; height:64px; }
+}
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width:4px; height:4px; }
@@ -392,6 +435,7 @@ opacity:0; pointer-events:none; transition:opacity .3s; }
     <button class="nav-btn" id="pauseBtn" onclick="togglePause()">⏸</button>
   </div>
   <!-- Stats bar -->
+  <!-- Stats bar -->
   <div class="quiz-topbar">
     <div class="progress-wrap">
       <div class="progress-labels">
@@ -405,18 +449,28 @@ opacity:0; pointer-events:none; transition:opacity .3s; }
       <div class="timer-val green" id="timerVal">05:00</div>
     </div>
   </div>
-  <!-- Input + mic bar -->
-  <div class="quiz-inputbar">
-    <button class="mic-btn-sm" id="micBtn">🎙</button>
-    <input class="quiz-input" id="quizInput" placeholder="Type or speak a name…" autocomplete="off" autocorrect="off" spellcheck="false">
-    <button class="go-btn" onclick="submitGuess()">GO</button>
+
+  <!-- Split layout wrapper -->
+  <div style="display:contents" id="quizSplit">
+
+    <!-- LEFT — chart -->
+    <div class="quiz-left">
+      <div class="chart-wrap">
+        <table class="chart-table" id="chartTable"></table>
+      </div>
+    </div>
+
+    <!-- RIGHT — input + mic (shown as bottom bar on mobile) -->
+    <div class="quiz-right">
+      <div class="quiz-inputbar">
+        <button class="mic-btn-sm" id="micBtn">🎙</button>
+        <input class="quiz-input" id="quizInput" placeholder="Type or speak a name…" autocomplete="off" autocorrect="off" spellcheck="false">
+        <button class="go-btn" onclick="submitGuess()">GO</button>
+      </div>
+      <div class="mic-live-bar" id="micLive"></div>
+    </div>
+
   </div>
-  <div class="mic-live-bar" id="micLive"></div>
-  <!-- Chart -->
-  <div class="chart-wrap">
-    <table class="chart-table" id="chartTable"></table>
-  </div>
-</div>
 
 <!-- LEARN -->
 
